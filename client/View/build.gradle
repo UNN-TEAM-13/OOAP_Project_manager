@@ -1,0 +1,12 @@
+apply from:   rootDir.getAbsolutePath() + '.config/javafx.plugin'
+
+compileJava.options.encoding = 'UTF-8'
+
+dependencies {
+    compile project(':Presenter')
+}
+
+// For validation of FXML
+sourceSets.test {
+    resources.srcDirs = ["src/main/resources"]
+}
