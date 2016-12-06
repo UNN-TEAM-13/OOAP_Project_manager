@@ -1,0 +1,112 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+allprojects {
+    apply plugin: 'jacoco'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'net.sourceforge.pmd:pmd:5.3.0'
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
+    apply plugin: 'checkstyle'
+    apply plugin: 'pmd'
+
+    repositories {
+       mavenCentral()
+    }
+
+    dependencies {
+        testCompile 'junit:junit:4.11'
+    }
+
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+        options.compilerArgs << "-Werror"
+    }
+
+    test {
+        setMaxParallelForks Runtime.runtime.availableProcessors()
+        afterTest { desc, result ->
+                String suiteName = desc.className.substring(desc.className.lastIndexOf('.') + 1)
+                println "[${suiteName}]: ${result.resultType} in ${desc.name}"
+        }
+    }
+
+    checkstyle {
+        toolVersion = '7.2'
+        checkstyleMain.configFile = new File(rootDir.getAbsolutePath() + "/code/config/checkstyle/", "main.xml")
+        checkstyleTest.configFile = new File(rootDir.getAbsolutePath() + "/code/config/checkstyle/", "test.xml")
+    }
+
+    pmd {
+        pmdMain.ruleSetFiles = files(rootDir.getAbsolutePath() + "/code/config/pmd/rules.xml")
+        pmdTest.ruleSets = [ "java-basic", "java-braces" ]
+    }
+
+    gradle.taskGraph.beforeTask { Task task ->
+        if (task.name == 'jfxDeploy') {
+            task.enabled = false
+        }
+    }
+
+    gradle.taskGraph.afterTask { Task task, TaskState state ->
+        if ((task.name == 'pmdMain' || task.name == 'pmdTest') && state.failure) {
+            def outFile = task.name == 'pmdMain' ? 'main.xml' : 'test.xml'
+            def reportFile = file("${buildDir}/reports/pmd/${outFile}")
+            if (reportFile.exists()) {
+                def result = new XmlParser().parse(reportFile)
+                result.file.each { file ->
+                    file.violation.each { violation ->
+                        println "${file.'@name'}:${violation.'@beginline'}: ${violation.text()}"
+                    }
+                }
+                reportFile.delete()
+            }
+        } else if (task.name == 'jacocoTestReport'
+                        && state.getExecuted() && state.getSkipped()
+                        && task.getProject().getName() != 'agile-course-practice') {
+            println '[**************** \\(°□°)/ ****************]'
+            throw new RuntimeException("Cannot proceed w/o test report!")
+        } else if (task.name == 'jacocoRootReport' && state.failure) {
+            println '[**************** \\(°□°)/ ****************]'
+            throw new RuntimeException("Cannot proceed w/o test report!")
+        }
+    }
+
+    jacocoTestReport {
+        reports {
+            html.enabled = true
+            xml.enabled = true
+            csv.enabled = false
+        }
+    }
+}
+
+task jacocoRootReport(type: org.gradle.testing.jacoco.tasks.JacocoReport) {
+    dependsOn = subprojects.test
+    sourceDirectories = files(subprojects.sourceSets.main.allSource.srcDirs)
+    classDirectories = files(subprojects.sourceSets.main.output)
+    executionData = files(subprojects.jacocoTestReport.executionData)
+
+    reports {
+        html.enabled = true
+        xml.enabled = true
+        csv.enabled = false
+        xml.destination = "${buildDir}/reports/jacoco/test/jacocoTestReport.xml"
+    }
+}

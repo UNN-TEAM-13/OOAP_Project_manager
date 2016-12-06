@@ -1,0 +1,11 @@
+include "server/DAL"
+project(":server/DAL").name = "DAL"
+
+include "server/Model"
+project(":server/Model").name = "Model"
+
+include "server/Presenter"
+project(":server/Presenter").name = "Presenter"
+
+include "server/View"
+project(":server/View").name = "View"
