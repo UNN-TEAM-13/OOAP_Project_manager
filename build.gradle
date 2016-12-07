@@ -49,12 +49,12 @@ subprojects {
 
     checkstyle {
         toolVersion = '7.2'
-        checkstyleMain.configFile = new File(rootDir.getAbsolutePath() + "/code/config/checkstyle/", "main.xml")
-        checkstyleTest.configFile = new File(rootDir.getAbsolutePath() + "/code/config/checkstyle/", "test.xml")
+        checkstyleMain.configFile = new File(rootDir.getAbsolutePath() + "/.config/checkstyle/", "main.xml")
+        checkstyleTest.configFile = new File(rootDir.getAbsolutePath() + "/.config/checkstyle/", "test.xml")
     }
 
     pmd {
-        pmdMain.ruleSetFiles = files(rootDir.getAbsolutePath() + "/code/config/pmd/rules.xml")
+        pmdMain.ruleSetFiles = files(rootDir.getAbsolutePath() + "/.config/pmd/rules.xml")
         pmdTest.ruleSets = [ "java-basic", "java-braces" ]
     }
 
