@@ -4,8 +4,11 @@ project(":server/DAL").name = "DAL"
 include "server/Model"
 project(":server/Model").name = "Model"
 
+include "server/Presenter"
+project(":server/Presenter").name = "Presenter-Server"
+
 include "client/Presenter"
-project(":client/Presenter").name = "Presenter"
+project(":client/Presenter").name = "Presenter-Client"
 
 include "client/View"
 project(":client/View").name = "View"

@@ -10,6 +10,6 @@ before_script:
 script:
   - TERM=dumb
   - gradle -v
-  - gradle check jacocoTestReport
+  - gradle check
 notifications:
   email: false
