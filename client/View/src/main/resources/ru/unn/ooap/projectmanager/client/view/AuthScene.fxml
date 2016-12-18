@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Button?>
+<?import ru.unn.ooap.projectmanager.client.view.AuthView?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.unn.ooap.projectmanager.client.view.AuthView">
+    <GridPane maxWidth="Infinity">
+        <Label text="Логин: " GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <Label text="Пароль: " GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <TextField fx:id="usernameTextField" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.hgrow="always"/>
+        <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.hgrow="always"/>
+    </GridPane>
+    <Button fx:id="loginButton" text="Войти" defaultButton="true" maxWidth="Infinity"/>
+</VBox>

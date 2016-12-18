@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.Pane?>
+
+<HBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.unn.ooap.projectmanager.client.view.manager.ManagerSceneView">
+    <TreeView fx:id="projects"/>
+    <Pane fx:id="content"/>
+</HBox>
