@@ -1,4 +1,4 @@
-package ru.unn.ooap.projectmanager.view;
+package ru.unn.ooap.projectmanager.client.view;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +10,7 @@ public class Main extends Application {
 
     @Override
     public void start(final Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Auth.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("AuthSceneView.fxml"));
         primaryStage.setTitle("Аутентификация");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

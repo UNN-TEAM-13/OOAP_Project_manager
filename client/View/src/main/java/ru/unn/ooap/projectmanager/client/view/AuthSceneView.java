@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import ru.unn.ooap.projectmanager.client.presenter.IAuthView;
 import ru.unn.ooap.projectmanager.client.presenter.AuthPresenter;
 
-public class AuthView implements IAuthView {
+public class AuthSceneView implements IAuthView {
     @FXML
     private TextField usernameTextField;
     @FXML

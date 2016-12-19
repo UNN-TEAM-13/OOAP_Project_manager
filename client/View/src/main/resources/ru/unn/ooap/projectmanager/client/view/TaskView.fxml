@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+
+<GridPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.unn.ooap.projectmanager.client.view.TaskView">
+    <Label text="Название: " GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+    <TextField fx:id="title" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+    <Label text="Описание: " GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    <TextField fx:id="description" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+    <Label text="Дано времени: " GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+    <TextField fx:id="givenHoursText" GridPane.rowIndex="3" GridPane.columnIndex="2" text="0"/>
+    <Label text="Потрачено времени: " GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+    <TextField fx:id="spentHoursText" GridPane.rowIndex="4" GridPane.columnIndex="2" editable="false" text="0"/>
+    <Label text="Осталось времени: " GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+    <TextField fx:id="leftHoursText" GridPane.rowIndex="5" GridPane.columnIndex="2" editable="false" text="0"/>
+</GridPane>

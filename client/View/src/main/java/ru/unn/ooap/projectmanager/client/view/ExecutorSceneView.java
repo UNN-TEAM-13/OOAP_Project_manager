@@ -1,4 +1,4 @@
-package ru.unn.ooap.projectmanager.client.view.executor;
+package ru.unn.ooap.projectmanager.client.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
