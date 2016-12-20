@@ -1,16 +1,19 @@
 package ru.unn.ooap.projectmanager.server.model.projects;
 
+import ru.unn.ooap.projectmanager.server.model.IDAL;
 import ru.unn.ooap.projectmanager.server.model.tasks.Task;
 
 import java.util.List;
 
 public class Project {
+    private int id;
     private String title;
     private String description;
     private List<Task> tasks;
+    private IDAL storage;
 
-    public Project(final String title) {
-        this.title = title;
+    public Project() {
+
     }
 
     public void setTitle(final String newTitle) {

@@ -1,6 +1,6 @@
 package ru.unn.ooap.projectmanager.server.model.users.manager;
 
-import ru.unn.ooap.projectmanager.server.model.users.executor.Executor;
+import ru.unn.ooap.projectmanager.server.model.users.User;
 
 public interface ITask {
     String getTitle();
@@ -11,6 +11,10 @@ public interface ITask {
     void setGivenHours(double givenHours);
     double getSpentHours();
     double getLeftHours();
-    Executor getExecutor();
-    void setExecutor(Executor executor);
+    User getExecutor();
+    void setExecutor(User executor);
+    boolean isDone();
+    boolean isOpen();
+    void close();
+    void open();
 }
