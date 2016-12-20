@@ -16,16 +16,16 @@ public class Project {
 
     }
 
-    public void setTitle(final String newTitle) {
-        title = newTitle;
+    public void setTitle(final String title) {
+        this.title = title;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setDescription(final String newDescription) {
-        description = newDescription;
+    public void setDescription(final String description) {
+        this.description = description;
     }
 
     public String getDescription() {
@@ -36,7 +36,8 @@ public class Project {
         return tasks;
     }
 
-    public void addTask(final Task newTask) {
-        tasks.add(newTask);
+    @Override
+    public void addTask(Task task) {
+
     }
 }

@@ -2,8 +2,7 @@ package ru.unn.ooap.projectmanager.server.model.tasks;
 
 import ru.unn.ooap.projectmanager.server.model.users.User;
 
-public class Task implements
-        ru.unn.ooap.projectmanager.server.model.users.executor.ITask,
+public class Task implements ru.unn.ooap.projectmanager.server.model.users.executor.ITask,
         ru.unn.ooap.projectmanager.server.model.users.manager.ITask {
 
     private int id;
