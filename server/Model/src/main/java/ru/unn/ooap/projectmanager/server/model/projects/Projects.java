@@ -11,7 +11,7 @@ public class Projects {
 
     private Projects(IDAL storage) {
         this.storage = storage;
-        this.projects = storage.getProjects();
+        storage.sync(this);
     }
 
     public synchronized static void init(IDAL storage) {
@@ -28,20 +28,19 @@ public class Projects {
     public Project create() {
         Project project = new Project();
         projects.add(project);
-        storage.syncProjects(this);
+        storage.sync(this);
+        return project;
     }
 
     public List<Project> getAll() {
-
+        return projects;
     }
 
     public List<Project> getOpen() {
-
+        return null;
     }
 
     public List<Project> getClosed() {
-
+        return null;
     }
-
-
 }

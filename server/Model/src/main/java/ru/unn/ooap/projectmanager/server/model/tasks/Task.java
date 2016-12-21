@@ -1,6 +1,6 @@
 package ru.unn.ooap.projectmanager.server.model.tasks;
 
-import ru.unn.ooap.projectmanager.server.model.users.User;
+import ru.unn.ooap.projectmanager.server.model.users.executor.Executor;
 
 public class Task implements ru.unn.ooap.projectmanager.server.model.users.executor.ITask,
         ru.unn.ooap.projectmanager.server.model.users.manager.ITask {
@@ -8,7 +8,7 @@ public class Task implements ru.unn.ooap.projectmanager.server.model.users.execu
     private int id;
     private String title;
     private String description;
-    private User executor;
+    private Executor executor;
     private double givenHours;
     private double spentHours;
     private boolean open;
@@ -39,12 +39,12 @@ public class Task implements ru.unn.ooap.projectmanager.server.model.users.execu
     }
 
     @Override
-    public void setExecutor(final User executor) {
+    public void setExecutor(final Executor executor) {
         this.executor = executor;
     }
 
     @Override
-    public User getExecutor() {
+    public Executor getExecutor() {
         return executor;
     }
 

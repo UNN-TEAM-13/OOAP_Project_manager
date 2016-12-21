@@ -5,11 +5,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import ru.unn.ooap.projectmanager.server.model.users.Users;
 
 public class Main extends Application {
 
     @Override
-    public void start(final Stage primaryStage) throws Exception {
+    public void start(Stage defaultStage) throws Exception {
+        PMSStage primaryStage = new PMSStage();
+        Users.init(primaryStage.getStorage());
         Parent root = FXMLLoader.load(getClass().getResource("AuthSceneView.fxml"));
         primaryStage.setTitle("Аутентификация");
         primaryStage.setScene(new Scene(root));
