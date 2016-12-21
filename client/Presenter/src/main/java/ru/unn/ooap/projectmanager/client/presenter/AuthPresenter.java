@@ -15,6 +15,10 @@ public class AuthPresenter {
     private String status;
     private boolean isButtonActive;
 
+    public AuthPresenter(IAuthView view) {
+        this.view = view;
+    }
+
     private void setStatus(final String statusString) {
         status = statusString;
     }
@@ -24,7 +28,7 @@ public class AuthPresenter {
     }
 
     public void auth() {
-        User user = Users.auth(username, password);
+        User user = Users.auth(view.getUsernameText(), view.getUsernameText());
         view.setUser(user);
         try {
             if (user instanceof Executor) {

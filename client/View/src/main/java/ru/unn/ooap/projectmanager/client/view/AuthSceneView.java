@@ -22,7 +22,7 @@ public class AuthSceneView implements IAuthView {
     @FXML
     private Button loginButton;
 
-    private final AuthPresenter presenter = new AuthPresenter();
+    private final AuthPresenter presenter = new AuthPresenter(this);
 
     public void initialize() {
         loginButton.setOnAction(event -> presenter.auth());
