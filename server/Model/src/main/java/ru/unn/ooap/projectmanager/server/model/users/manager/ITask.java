@@ -13,4 +13,8 @@ public interface ITask {
     double getLeftHours();
     Executor getExecutor();
     void setExecutor(Executor executor);
+    boolean isDone();
+    boolean isOpen();
+    void close();
+    void open();
 }

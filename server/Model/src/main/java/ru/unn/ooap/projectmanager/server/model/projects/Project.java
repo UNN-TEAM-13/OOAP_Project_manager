@@ -1,28 +1,35 @@
 package ru.unn.ooap.projectmanager.server.model.projects;
 
+import ru.unn.ooap.projectmanager.server.model.IDAL;
 import ru.unn.ooap.projectmanager.server.model.tasks.Task;
+import ru.unn.ooap.projectmanager.server.model.users.manager.IProject;
 
 import java.util.List;
 
-public class Project {
+public class Project implements IProject {
+    private int id;
     private String title;
     private String description;
     private List<Task> tasks;
+    private static IDAL storage;
 
-    public Project(final String title) {
-        this.title = title;
+    Project() {
     }
 
-    public void setTitle(final String newTitle) {
-        title = newTitle;
+    public static void setStorage(final IDAL storage) {
+        Project.storage = storage;
+    }
+
+    public void setTitle(final String title) {
+        this.title = title;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setDescription(final String newDescription) {
-        description = newDescription;
+    public void setDescription(final String description) {
+        this.description = description;
     }
 
     public String getDescription() {
@@ -33,7 +40,9 @@ public class Project {
         return tasks;
     }
 
-    public void addTask(final Task newTask) {
-        tasks.add(newTask);
+    @Override
+    public void addTask(final Task task) {
+        tasks.add(task);
+        storage.sync(this);
     }
 }

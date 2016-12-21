@@ -4,6 +4,7 @@ compileJava.options.encoding = 'UTF-8'
 
 dependencies {
     compile project(':Presenter-Client')
+    compile project(':DAL')
 }
 
 // For validation of FXML

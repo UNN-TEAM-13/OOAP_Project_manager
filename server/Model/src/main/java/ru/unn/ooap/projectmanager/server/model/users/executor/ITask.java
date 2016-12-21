@@ -7,4 +7,7 @@ public interface ITask {
     double getSpentHours();
     double getLeftHours();
     void addSpentHours(double additionalSpentHours);
+    boolean isOpen();
+    boolean isDone();
+    void setDone(boolean done);
 }
