@@ -1,14 +1,14 @@
-include "server/DAL"
-project(":server/DAL").name = "DAL"
+include "code/server/DAL"
+project(":code/server/DAL").name = "DAL"
 
-include "server/Model"
-project(":server/Model").name = "Model"
+include "code/server/Model"
+project(":code/server/Model").name = "Model"
 
-include "server/Presenter"
-project(":server/Presenter").name = "Presenter-Server"
+include "code/server/Presenter"
+project(":code/server/Presenter").name = "Presenter-Server"
 
-include "client/Presenter"
-project(":client/Presenter").name = "Presenter-Client"
+include "code/client/Presenter"
+project(":code/client/Presenter").name = "Presenter-Client"
 
-include "client/View"
-project(":client/View").name = "View"
+include "code/client/View"
+project(":code/client/View").name = "View"
