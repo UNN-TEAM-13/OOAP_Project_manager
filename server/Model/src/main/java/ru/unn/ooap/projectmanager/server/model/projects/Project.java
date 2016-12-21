@@ -2,10 +2,11 @@ package ru.unn.ooap.projectmanager.server.model.projects;
 
 import ru.unn.ooap.projectmanager.server.model.IDAL;
 import ru.unn.ooap.projectmanager.server.model.tasks.Task;
+import ru.unn.ooap.projectmanager.server.model.users.manager.IProject;
 
 import java.util.List;
 
-public class Project {
+public class Project implements IProject{
     private int id;
     private String title;
     private String description;

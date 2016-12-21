@@ -1,5 +1,7 @@
 package ru.unn.ooap.projectmanager.server.model.users.manager;
 
+import ru.unn.ooap.projectmanager.server.model.tasks.Task;
+
 import java.util.List;
 
 public interface IProject {
@@ -7,8 +9,8 @@ public interface IProject {
     String getTitle();
     void setDescription(String description);
     String getDescription();
-    void addTask(ITask task);
-    List<ITask> getTasks();
+    void addTask(Task task);
+    List<Task> getTasks();
     // TODO:
     // getPlan();
     // setPlan();
