@@ -6,15 +6,18 @@ import ru.unn.ooap.projectmanager.server.model.users.manager.IProject;
 
 import java.util.List;
 
-public class Project implements IProject{
+public class Project implements IProject {
     private int id;
     private String title;
     private String description;
     private List<Task> tasks;
-    private IDAL storage;
+    private static IDAL storage;
 
-    public Project() {
+    Project() {
+    }
 
+    public static void setStorage(final IDAL storage) {
+        Project.storage = storage;
     }
 
     public void setTitle(final String title) {
@@ -38,7 +41,8 @@ public class Project implements IProject{
     }
 
     @Override
-    public void addTask(Task task) {
-
+    public void addTask(final Task task) {
+        tasks.add(task);
+        storage.sync(this);
     }
 }

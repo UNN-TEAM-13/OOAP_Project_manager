@@ -4,17 +4,17 @@ import ru.unn.ooap.projectmanager.server.model.IDAL;
 
 import java.util.List;
 
-public class Projects {
+public final class Projects {
     private static Projects instance = null;
     private List<Project> projects;
-    private IDAL storage;
+    private final IDAL storage;
 
-    private Projects(IDAL storage) {
+    private Projects(final IDAL storage) {
         this.storage = storage;
         storage.sync(this);
     }
 
-    public synchronized static void init(IDAL storage) {
+    public static synchronized void init(final IDAL storage) {
         if (instance != null) {
             throw new AssertionError("Already initialized");
         }
@@ -42,5 +42,12 @@ public class Projects {
 
     public List<Project> getClosed() {
         return null;
+    }
+
+    Project createProject() {
+        Project project = new Project();
+        storage.sync(project);
+        storage.sync(this);
+        return project;
     }
 }

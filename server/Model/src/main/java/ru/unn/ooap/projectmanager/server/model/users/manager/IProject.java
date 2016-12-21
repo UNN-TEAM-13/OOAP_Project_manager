@@ -11,7 +11,6 @@ public interface IProject {
     String getDescription();
     void addTask(Task task);
     List<Task> getTasks();
-    // TODO:
     // getPlan();
     // setPlan();
 }
