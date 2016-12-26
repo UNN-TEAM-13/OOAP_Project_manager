@@ -59,6 +59,7 @@ public class AuthSceneView implements IAuthView {
         currStage.setUser(user);
     }
 
+    @Override
     private void showScene(final String title, final String fxmlMarkup) throws IOException {
         Stage currStage = (Stage) loginButton.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource(fxmlMarkup));
@@ -67,20 +68,5 @@ public class AuthSceneView implements IAuthView {
         currStage.setMinHeight(Double.MIN_VALUE);
         currStage.setScene(new Scene(root));
         currStage.show();
-    }
-
-    @Override
-    public void showAdminScene() throws IOException {
-        showScene("Администратор", "AdminSceneView.fxml");
-    }
-
-    @Override
-    public void showManagerScene() throws IOException {
-        showScene("Менеджер", "ManagerSceneView.fxml");
-    }
-
-    @Override
-    public void showExecutorScene() throws IOException {
-        showScene("Исполнитель", "ExecutorSceneView.fxml");
     }
 }

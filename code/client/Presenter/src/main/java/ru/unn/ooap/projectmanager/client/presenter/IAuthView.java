@@ -6,10 +6,7 @@ import java.io.IOException;
 
 public interface IAuthView {
     void setUser(User user);
-    void showExecutorScene() throws IOException;
-    void showManagerScene() throws IOException;
-    void showAdminScene() throws IOException;
-    void setUsernameText(String username);
+    void showScene(String WindowTitle, String fxmlFile) throws IOException;
     String getUsernameText();
     String getPasswordText();
     boolean getButtonState();
