@@ -1,13 +1,16 @@
 package ru.unn.ooap.projectmanager.server.model.users;
 
+import javafx.scene.control.ListView;
 import ru.unn.ooap.projectmanager.server.model.IDAL;
+import ru.unn.ooap.projectmanager.server.model.users.administrator.IAdminisrator;
+import ru.unn.ooap.projectmanager.server.model.users.manager.IManager;
 
 import java.util.List;
 
 public final class Users {
     private static Users instance = null;
     private static IDAL storage;
-    private static List<User> users;
+    private static List<IUser> users;
 
     private Users(final IDAL storage) {
         Users.storage = storage;
@@ -25,8 +28,8 @@ public final class Users {
         return instance;
     }
 
-    public static User auth(final String un, final String pw) {
-        for (User user : users) {
+    public static IUser auth(final String un, final String pw) {
+        for (IUser user : users) {
             if (user.getUsername().equals(un) && user.isPasswordValid(pw)) {
                 return user;
             }
@@ -34,7 +37,23 @@ public final class Users {
         return null;
     }
 
-    public static void setUsers(final List<User> users) {
+    public static void setUsers(final List<IUser> users) {
         Users.users = users;
+    }
+
+    public IAdminisrator createAdministrator() {
+        return null;
+    }
+
+    public IAdminisrator createManager() {
+        return null;
+    }
+
+    public IAdminisrator createExecutor() {
+        return null;
+    }
+
+    public List<IUser> get() {
+        return users;
     }
 }

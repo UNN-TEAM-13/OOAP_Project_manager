@@ -32,11 +32,11 @@ public class AuthPresenter {
         view.setUser(user);
         try {
             if (user instanceof Executor) {
-                view.showScene("Исполнитель", "ExecutorSceneView.fxml");
+                view.showScene("ExecutorSceneView.fxml");
             } else if (user instanceof Manager) {
-                view.showScene("Менеджер", "ManagerSceneView.fxml");
+                view.showScene("ManagerSceneView.fxml");
             } else if (user instanceof Administrator) {
-                view.showScene("Администратор", "AdminSceneView.fxml");
+                view.showScene("AdminSceneView.fxml");
             } else if (user == null) {
                 setStatus("FAIL: Wrong authentication data");
             } else {
@@ -45,5 +45,9 @@ public class AuthPresenter {
         } catch (IOException e) {
             setStatus("FAIL: Input/output error");
         }
+    }
+
+    protected void openMainWindow() {
+
     }
 }

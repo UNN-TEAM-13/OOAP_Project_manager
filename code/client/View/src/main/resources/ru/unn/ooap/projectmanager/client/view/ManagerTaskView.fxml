@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import ru.unn.ooap.projectmanager.client.presenter.manager.TaskPresenter?>
+<?import javafx.scene.control.ProgressBar?>
+
+<GridPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.unn.ooap.projectmanager.client.view.ManagerTaskView">
+    <fx:define>
+        <TaskPresenter fx:id="presenter" />
+    </fx:define>
+    <!-- Title, description, time are bidirectional binded in controller -->
+    <Label text="Название: " GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+    <TextField fx:id="title" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+    <Label text="Описание: " GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    <TextField fx:id="description" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+    <Label text="Дано времени: " GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+    <TextField fx:id="givenHoursTextField" GridPane.rowIndex="3" GridPane.columnIndex="2" text="0"/>
+    <Label text="Потрачено времени: " GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+    <ProgressBar fx:id="spentHoursProgressBar" progress="${presenter.spentHoursPercent}" GridPane.rowIndex="4" GridPane.columnIndex="2" />
+    <Button fx:id="apply" text="Применить" disable="${presenter.applyButtonDisable}" />
+</GridPane>

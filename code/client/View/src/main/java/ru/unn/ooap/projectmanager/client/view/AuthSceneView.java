@@ -54,16 +54,15 @@ public class AuthSceneView implements IAuthView {
     }
 
     @Override
-    public void setUser(User user) {
+    public void setUser(final User user) {
         PMSStage currStage = (PMSStage) loginButton.getScene().getWindow();
         currStage.setUser(user);
     }
 
     @Override
-    private void showScene(final String title, final String fxmlMarkup) throws IOException {
+    public void showScene(final String fxmlMarkup) throws IOException {
         Stage currStage = (Stage) loginButton.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource(fxmlMarkup));
-        currStage.setTitle(title);
         currStage.setMaxHeight(Double.MAX_VALUE);
         currStage.setMinHeight(Double.MIN_VALUE);
         currStage.setScene(new Scene(root));

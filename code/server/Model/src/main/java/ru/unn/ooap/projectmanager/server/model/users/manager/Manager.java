@@ -5,7 +5,7 @@ import ru.unn.ooap.projectmanager.server.model.users.User;
 
 import java.util.List;
 
-public class Manager extends User {
+public class Manager extends User implements IManager {
     public Manager(final int id, final String un, final String pw) {
         super(id, un, pw);
     }
