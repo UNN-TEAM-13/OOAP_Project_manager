@@ -2,7 +2,7 @@ package ru.unn.ooap.projectmanager.server.model.users.manager;
 
 import ru.unn.ooap.projectmanager.server.model.users.executor.Executor;
 
-public interface ITask extends ru.unn.ooap.projectmanager.server.model.tasks.ITask{
+public interface ITask extends ru.unn.ooap.projectmanager.server.model.tasks.ITask {
     String getTitle();
     void setTitle(String title);
     String getDescription();

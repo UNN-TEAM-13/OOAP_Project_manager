@@ -19,6 +19,11 @@ public class Task implements ru.unn.ooap.projectmanager.server.model.users.execu
     }
 
     @Override
+    public int getID() {
+        return id;
+    }
+
+    @Override
     public void setTitle(final String title) {
         this.title = title;
     }

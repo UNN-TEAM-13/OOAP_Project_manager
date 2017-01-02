@@ -14,6 +14,7 @@ public class Project implements IProject {
     private static IDAL storage;
 
     Project() {
+        //initialisation
     }
 
     public static void setStorage(final IDAL storage) {

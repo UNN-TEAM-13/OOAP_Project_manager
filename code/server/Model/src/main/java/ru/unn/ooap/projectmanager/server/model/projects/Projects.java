@@ -14,11 +14,13 @@ public final class Projects {
         storage.sync(this);
     }
 
-    public static synchronized void init(final IDAL storage) {
-        if (instance != null) {
-            throw new AssertionError("Already initialized");
+    public static void init(final IDAL storage) {
+        synchronized (instance) {
+            if (instance != null) {
+                throw new AssertionError("Already initialized");
+            }
+            instance = new Projects(storage);
         }
-        instance = new Projects(storage);
     }
 
     public static Projects getInstance() {
