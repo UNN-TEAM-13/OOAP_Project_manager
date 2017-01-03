@@ -4,9 +4,9 @@ import re
 def process_java_file(file):
     with open(file, encoding="utf8") as file:
         content = file.read()
-        
+
     java_data = {'package': None, 'imports': [], 'classes': [], 'interfaces': []}
-    
+
     lines = content.split('\n')
     in_class = False
     for line in lines:
@@ -80,59 +80,83 @@ def process_java_file(file):
                             break;
                     else:
                         class_['uses'].append(java_data['package'] + '.' + token)
-                        
-            # TODO: process classes composition
     return java_data
-    
 
-if __name__ == "__main__":    
+
+if __name__ == "__main__":
     project_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../code'))
-    
+
     classes = []
     interfaces = []
-    
+
     for dirpath, dirnames, filenames in os.walk(project_path):
         for filename in filenames:
             if filename.endswith('.java'):
                 java_data = process_java_file(os.path.join(dirpath, filename))
                 interfaces += java_data['interfaces']
                 classes += java_data['classes']
-    
+
     classnames = [class_['name'] for class_ in classes]
     interfacenames = [interface_['name'] for interface_ in interfaces]
-    
-    lines = []
-    lines.append('strict digraph dependencies {')
-    lines.append('overlap = false;')
-    
-    classnames = [class_['name'] for class_ in classes]
-    interfacenames = [interface_['name'] for interface_ in interfaces]
-    
+
+    subgraphs = {'model' : {'nodes': [], 'label': 'model'},
+                 'presenter': {'nodes': [], 'label': 'presenter'},
+                 'view': {'nodes': [], 'label': 'view'},
+                 'dal': {'nodes': [], 'label': 'DAL'}}
+
     for class_ in classes:
-        lines.append('"{}" [shape=box color=blue label="{}"];'.format(class_['name'], class_['name'].replace('ru.unn.ooap.projectmanager.', '')))
+        node = {'name': class_['name'], 'properties': {'label': class_['name'].replace('ru.unn.ooap.projectmanager.', ''), 'shape': 'box', 'color': 'blue'}}
+        subgraphs[class_['name'].replace('ru.unn.ooap.projectmanager.', '').split('.')[1]]['nodes'].append(node)
+    for interface_ in interfaces:
+        node = {'name': interface_['name'], 'properties': {'label': interface_['name'].replace('ru.unn.ooap.projectmanager.', ''), 'shape': 'box', 'color': 'green'}}
+        subgraphs[interface_['name'].replace('ru.unn.ooap.projectmanager.', '').split('.')[1]]['nodes'].append(node)
+
+    classnames = [class_['name'] for class_ in classes]
+    interfacenames = [interface_['name'] for interface_ in interfaces]
+
+    edges = []
+    for class_ in classes:
         for base_class in class_['extends']:
             if base_class in classnames:
-                lines.append('"{}" -> "{}" [arrowhead=empty];'.format(class_['name'], base_class))
+                edges.append({'nodes': [class_['name'], base_class], 'properties': {'arrowhead': 'empty'}})
         for base_interface in class_['implements']:
             if base_interface in interfacenames:
-                lines.append('"{}" -> "{}" [arrowhead=empty  style=dashed];'.format(class_['name'], base_interface))
+                edges.append({'nodes': [class_['name'], base_interface], 'properties': {'arrowhead': 'empty', 'style': 'dashed'}})
         for used in class_['uses']:
-            if used in interfacenames:
-                lines.append('"{}" -> "{}" [arrowhead=open];'.format(class_['name'], used))
-            if used in classnames:
-                lines.append('"{}" -> "{}" [arrowhead=open];'.format(class_['name'], used))
+            if used in classnames + interfacenames:
+                edges.append({'nodes': [class_['name'], used], 'properties': {'arrowhead': 'open'}})
     for interface_ in interfaces:
-        lines.append('"{}" [shape=box color=green label="{}"];'.format(interface_['name'], interface_['name'].replace('ru.unn.ooap.projectmanager.', '')))
         for base_interface in interface_['extends']:
             if base_interface in interfacenames:
-                lines.append('"{}" -> "{}" [arrowhead=empty];'.format(interface_['name'], base_interface))
+                edges.append({'nodes': [interface_['name'], base_interface], 'properties': {'arrowhead': 'empty'}})
         for used in interface_['uses']:
-            if used in interfacenames:
-                lines.append('"{}" -> "{}" [arrowhead=open];'.format(interface_['name'], used))
-            if used in classnames:
-                lines.append('"{}" -> "{}" [arrowhead=open];'.format(interface_['name'], used))
+            if used in classnames + interfacenames:
+                edges.append({'nodes': [interface_['name'], used], 'properties': {'arrowhead': 'open'}})
+
+    lines = []
+    lines.append('strict digraph Dependencies {')
+    lines.append('overlap = false;')
+
+    for subgraph in subgraphs.keys():
+        cluster = subgraphs[subgraph]
+        lines.append('subgraph cluster_{} '.format(subgraph) + '{')
+        lines.append('label = ' + cluster['label'] + ';')
+        for node in cluster['nodes']:
+            properties = []
+            for property in node['properties']:
+                properties.append('{}="{}"'.format(property, node['properties'][property]))
+            lines.append('"{}" [{}];'.format(node['name'], ' '.join(properties)))
+        lines.append('}')
+
+    for edge in edges:
+        properties = []
+        for property in edge['properties']:
+            properties.append('{}="{}"'.format(property, edge['properties'][property]))
+        properties = ' '.join(properties)
+        lines.append('"{}" -> "{}" [{}];'.format(edge['nodes'][0], edge['nodes'][1], properties))
+
     lines.append('}')
-    
+
     with open('pms_cd.gv', 'w', encoding='utf8') as file:
         for line in lines:
             file.write(line);
