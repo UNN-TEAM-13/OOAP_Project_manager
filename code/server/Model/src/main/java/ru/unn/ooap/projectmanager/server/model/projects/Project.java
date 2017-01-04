@@ -13,7 +13,7 @@ public class Project implements IProject {
     private List<Task> tasks;
     private static IDAL storage;
 
-    Project() {
+    public Project() {
         //initialisation
     }
 

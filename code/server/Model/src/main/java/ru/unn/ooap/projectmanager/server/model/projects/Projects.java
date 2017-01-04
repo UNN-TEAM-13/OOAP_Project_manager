@@ -52,4 +52,8 @@ public final class Projects {
         storage.sync(this);
         return project;
     }
+
+    public void setProjects(final List<Project> projects) {
+        this.projects = projects;
+    }
 }

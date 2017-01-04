@@ -10,7 +10,7 @@
 
 <?import ru.unn.ooap.projectmanager.client.presenter.AuthPresenter?>
 
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.unn.ooap.projectmanager.client.view.AuthSceneView">
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.unn.ooap.projectmanager.client.view.AuthMainView">
     <fx:define>
         <AuthPresenter fx:id="presenter"/>
     </fx:define>

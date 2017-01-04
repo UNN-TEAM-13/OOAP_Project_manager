@@ -35,4 +35,16 @@ public class User implements IUser {
             return false;
         }
     }
+
+    public void setId(final int id) {
+        this.id = id;
+    }
+
+    public void setUsername(final String username) {
+        this.username = username;
+    }
+
+    public void setPassword(final String password) {
+        this.password = password;
+    }
 }

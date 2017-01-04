@@ -13,7 +13,7 @@ public class Main extends Application {
     public void start(final Stage defaultStage) throws Exception {
         PMSStage primaryStage = new PMSStage();
         Users.init(primaryStage.getStorage());
-        Parent root = FXMLLoader.load(getClass().getResource("AuthSceneView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("AuthMainView.fxml"));
         primaryStage.setTitle("Аутентификация");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

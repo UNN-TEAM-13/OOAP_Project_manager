@@ -14,7 +14,7 @@ import ru.unn.ooap.projectmanager.server.model.users.User;
 
 import java.io.IOException;
 
-public class AuthSceneView implements IAuthView {
+public class AuthMainView implements IAuthView {
     @FXML
     private TextField usernameTextField;
     @FXML

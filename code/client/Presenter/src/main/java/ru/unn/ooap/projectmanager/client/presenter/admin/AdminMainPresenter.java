@@ -4,7 +4,7 @@ import ru.unn.ooap.projectmanager.client.presenter.UserScenePresenter;
 import ru.unn.ooap.projectmanager.server.model.users.User;
 import ru.unn.ooap.projectmanager.server.model.users.administrator.Administrator;
 
-public class AdminScenePresenter implements UserScenePresenter{
+public class AdminMainPresenter implements UserScenePresenter{
     private Administrator user;
 
     @Override

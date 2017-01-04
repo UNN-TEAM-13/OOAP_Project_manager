@@ -1,4 +1,4 @@
 package ru.unn.ooap.projectmanager.client.presenter.admin;
 
-public interface IAdminSceneView {
+public interface IAdminMainView {
 }
