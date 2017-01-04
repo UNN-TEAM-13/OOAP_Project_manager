@@ -1,7 +1,7 @@
 package ru.unn.ooap.projectmanager.server.model.users;
 
 import ru.unn.ooap.projectmanager.server.model.IDAL;
-import ru.unn.ooap.projectmanager.server.model.users.administrator.IAdminisrator;
+import ru.unn.ooap.projectmanager.server.model.users.administrator.IAdministrator;
 
 import java.util.List;
 
@@ -41,15 +41,15 @@ public final class Users {
         Users.users = users;
     }
 
-    public IAdminisrator createAdministrator() {
+    public IAdministrator createAdministrator() {
         return null;
     }
 
-    public IAdminisrator createManager() {
+    public IAdministrator createManager() {
         return null;
     }
 
-    public IAdminisrator createExecutor() {
+    public IAdministrator createExecutor() {
         return null;
     }
 

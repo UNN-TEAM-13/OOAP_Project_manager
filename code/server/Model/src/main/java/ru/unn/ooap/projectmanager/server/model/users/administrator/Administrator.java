@@ -6,7 +6,7 @@ import ru.unn.ooap.projectmanager.server.model.users.Users;
 
 import java.util.List;
 
-public class Administrator extends User implements IAdminisrator {
+public class Administrator extends User implements IAdministrator {
     List<? extends IUser> getUsers() {
         return Users.getInstance().get();
     }
