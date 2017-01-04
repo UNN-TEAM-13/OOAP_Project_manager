@@ -24,7 +24,7 @@ public class AuthPresenter {
         // initialisation
     }
 
-    public void setView(IAuthView view) {
+    public void setView(final IAuthView view) {
         this.view = view;
     }
 

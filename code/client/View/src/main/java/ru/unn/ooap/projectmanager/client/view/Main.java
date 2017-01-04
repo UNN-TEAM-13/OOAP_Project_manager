@@ -10,7 +10,7 @@ import ru.unn.ooap.projectmanager.server.model.users.Users;
 public class Main extends Application {
 
     @Override
-    public void start(Stage defaultStage) throws Exception {
+    public void start(final Stage defaultStage) throws Exception {
         PMSStage primaryStage = new PMSStage();
         Users.init(primaryStage.getStorage());
         Parent root = FXMLLoader.load(getClass().getResource("AuthSceneView.fxml"));

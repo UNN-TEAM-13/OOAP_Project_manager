@@ -9,7 +9,7 @@ public class PMSStage extends Stage {
     private User user;
     private final IDAL storage = new FakeDAL();
 
-    public void setUser(User user) {
+    public void setUser(final User user) {
         this.user = user;
     }
 

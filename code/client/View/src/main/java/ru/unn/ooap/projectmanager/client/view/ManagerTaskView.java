@@ -5,7 +5,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import ru.unn.ooap.projectmanager.client.presenter.manager.TaskPresenter;
 
-public class ManagerTaskView implements ru.unn.ooap.projectmanager.client.presenter.manager.ITaskView {
+public class ManagerTaskView implements
+        ru.unn.ooap.projectmanager.client.presenter.manager.ITaskView {
     @FXML
     private TextField title;
     @FXML

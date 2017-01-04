@@ -8,7 +8,7 @@ abstract class WindowTitledPane {
     Stage getStage() {
         return (Stage) getFakeNode().getScene().getWindow();
     }
-    void setWindowTitle(String title) {
+    void setWindowTitle(final String title) {
         Stage stage = (Stage) getFakeNode().getScene().getWindow();
         stage.setTitle(title);
     }

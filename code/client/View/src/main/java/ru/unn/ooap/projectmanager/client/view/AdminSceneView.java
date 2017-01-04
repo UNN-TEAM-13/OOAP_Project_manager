@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import ru.unn.ooap.projectmanager.client.presenter.admin.IAdminSceneView;
 import ru.unn.ooap.projectmanager.client.presenter.admin.AdminScenePresenter;
 
