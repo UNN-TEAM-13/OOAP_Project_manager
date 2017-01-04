@@ -7,22 +7,30 @@ public class TaskPresenter {
     private IManager manager;
     private ITaskView view;
 
-    private BooleanProperty applyButtonDisable = new SimpleBooleanProperty();
-    private StringProperty titleText = new SimpleStringProperty();
-    private StringProperty descriptionText = new SimpleStringProperty();
-    private StringProperty givenHoursText = new SimpleStringProperty();
-    private DoubleProperty spentHoursPercent = new SimpleDoubleProperty();
+    private final BooleanProperty applyButtonDisable = new SimpleBooleanProperty();
+    private final StringProperty titleText = new SimpleStringProperty();
+    private final StringProperty descriptionText = new SimpleStringProperty();
+    private final StringProperty givenHoursText = new SimpleStringProperty();
+    private final DoubleProperty spentHoursPercent = new SimpleDoubleProperty();
 
     public TaskPresenter() {
         // initialisation
     }
 
-    public void setView(ITaskView view) {
+    public void setView(final ITaskView view) {
         this.view = view;
     }
 
-    public void setManager(IManager manager) {
+    public ITaskView getView() {
+        return view;
+    }
+
+    public void setManager(final IManager manager) {
         this.manager = manager;
+    }
+
+    public IManager getManager() {
+        return manager;
     }
 
     public BooleanProperty applyButtonDisableProperty() {

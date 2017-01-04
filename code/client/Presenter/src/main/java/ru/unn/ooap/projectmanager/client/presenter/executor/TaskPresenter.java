@@ -7,21 +7,29 @@ public class TaskPresenter {
     private ITaskView view;
     private IExecutor executor;
 
-    private StringProperty spentTimeReport = new SimpleStringProperty();
-    private StringProperty title = new SimpleStringProperty();
-    private StringProperty description = new SimpleStringProperty();
-    private DoubleProperty givenHours = new SimpleDoubleProperty();
-    private StringProperty givenHoursText = new SimpleStringProperty();
-    private DoubleProperty spentHours = new SimpleDoubleProperty();
-    private StringProperty spentHoursText = new SimpleStringProperty();
-    private IntegerProperty spentHoursPercent = new SimpleIntegerProperty();
+    private final StringProperty spentTimeReport = new SimpleStringProperty();
+    private final StringProperty title = new SimpleStringProperty();
+    private final StringProperty description = new SimpleStringProperty();
+    private final DoubleProperty givenHours = new SimpleDoubleProperty();
+    private final StringProperty givenHoursText = new SimpleStringProperty();
+    private final DoubleProperty spentHours = new SimpleDoubleProperty();
+    private final StringProperty spentHoursText = new SimpleStringProperty();
+    private final IntegerProperty spentHoursPercent = new SimpleIntegerProperty();
 
-    public void setView(ITaskView view) {
+    public void setView(final ITaskView view) {
         this.view = view;
     }
 
-    public void setExecutor(IExecutor executor) {
+    public ITaskView getView() {
+        return view;
+    }
+
+    public void setExecutor(final IExecutor executor) {
         this.executor = executor;
+    }
+
+    public IExecutor getExecutor() {
+        return executor;
     }
 
     public StringProperty spendTimeReportProperty() {

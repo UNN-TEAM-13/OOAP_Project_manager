@@ -10,22 +10,30 @@ public class ProjectPresenter {
     private IProjectView view;
     private IProject project;
 
-    private StringProperty titleText = new SimpleStringProperty();
-    private StringProperty descriptionText = new SimpleStringProperty();
-    private BooleanProperty applyButtonDisabled = new SimpleBooleanProperty();
-    private ObjectProperty<ObservableList<ITask>> tasks
+    private final StringProperty titleText = new SimpleStringProperty();
+    private final StringProperty descriptionText = new SimpleStringProperty();
+    private final BooleanProperty applyButtonDisabled = new SimpleBooleanProperty();
+    private final ObjectProperty<ObservableList<ITask>> tasks
             = new SimpleObjectProperty<>(FXCollections.observableArrayList());
 
     public ProjectPresenter() {
         // initialisation
     }
 
-    public void setView(IProjectView view) {
+    public void setView(final IProjectView view) {
         this.view = view;
     }
 
-    public void setProject(IProject project) {
+    public IProjectView getView() {
+        return view;
+    }
+
+    public void setProject(final IProject project) {
         this.project = project;
+    }
+
+    public IProject getProject() {
+        return project;
     }
 
     public StringProperty titleTextProperty() {

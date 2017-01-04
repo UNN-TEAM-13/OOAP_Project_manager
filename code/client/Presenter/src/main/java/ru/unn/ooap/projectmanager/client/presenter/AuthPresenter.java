@@ -15,10 +15,10 @@ import java.io.IOException;
 public class AuthPresenter {
     private IAuthView view;
 
-    private StringProperty username = new SimpleStringProperty();
-    private StringProperty password = new SimpleStringProperty();
-    private StringProperty status = new SimpleStringProperty();
-    private BooleanProperty buttonDisabled = new SimpleBooleanProperty();
+    private final StringProperty username = new SimpleStringProperty();
+    private final StringProperty password = new SimpleStringProperty();
+    private final StringProperty status = new SimpleStringProperty();
+    private final BooleanProperty buttonDisabled = new SimpleBooleanProperty();
 
     public AuthPresenter() {
         // initialisation
