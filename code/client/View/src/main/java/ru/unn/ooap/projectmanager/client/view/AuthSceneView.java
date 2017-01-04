@@ -21,36 +21,13 @@ public class AuthSceneView implements IAuthView {
     private PasswordField passwordField;
     @FXML
     private Button loginButton;
-
-    private final AuthPresenter presenter = new AuthPresenter(this);
+    @FXML
+    private AuthPresenter presenter;
 
     public void initialize() {
         loginButton.setOnAction(event -> presenter.auth());
-    }
-
-    @Override
-    public String getUsernameText() {
-        return usernameTextField.getText();
-    }
-
-    @Override
-    public void setUsernameText(final String text) {
-        usernameTextField.setText(text);
-    }
-
-    @Override
-    public String getPasswordText() {
-        return passwordField.getText();
-    }
-
-    @Override
-    public boolean getButtonState() {
-        return loginButton.isDisabled();
-    }
-
-    @Override
-    public void setButtonState(final boolean enabled) {
-        loginButton.setDisable(!enabled);
+        usernameTextField.textProperty().bindBidirectional(presenter.usernameProperty());
+        passwordField.textProperty().bindBidirectional(presenter.passwordProperty());
     }
 
     @Override

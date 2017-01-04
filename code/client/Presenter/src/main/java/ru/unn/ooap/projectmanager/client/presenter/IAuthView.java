@@ -7,5 +7,4 @@ import java.io.IOException;
 public interface IAuthView {
     void setUser(final User user);
     void showScene(String fxmlFile) throws IOException;
-    void setUsernameText(String usernameText);
 }

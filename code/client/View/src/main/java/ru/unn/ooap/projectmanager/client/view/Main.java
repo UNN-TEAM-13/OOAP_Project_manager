@@ -17,6 +17,7 @@ public class Main extends Application {
         primaryStage.setTitle("Аутентификация");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+
         double height = primaryStage.getHeight();
         primaryStage.setMinHeight(height);
         primaryStage.setMaxHeight(height);
