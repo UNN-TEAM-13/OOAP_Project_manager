@@ -32,6 +32,10 @@ public class AuthPresenter {
         return status.get();
     }
 
+    public StringProperty statusProperty() {
+        return status;
+    }
+
     public StringProperty usernameProperty() {
         return username;
     }

@@ -25,6 +25,7 @@ public class AuthSceneView implements IAuthView {
     private AuthPresenter presenter;
 
     public void initialize() {
+        presenter.setView(this);
         loginButton.setOnAction(event -> presenter.auth());
         usernameTextField.textProperty().bindBidirectional(presenter.usernameProperty());
         passwordField.textProperty().bindBidirectional(presenter.passwordProperty());
