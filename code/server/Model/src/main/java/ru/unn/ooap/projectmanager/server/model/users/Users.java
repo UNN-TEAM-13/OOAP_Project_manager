@@ -10,17 +10,17 @@ public final class Users {
     private static IDAL storage;
     private static List<User> users;
 
-    private Users(final IDAL storage) {
-        Users.storage = storage;
-        storage.sync(this);
+    private Users() {
     }
 
     public static void init(final IDAL storage) {
-        synchronized (instance) {
+        synchronized (Users.class) {
             if (instance != null) {
                 throw new AssertionError("Already initialized");
             }
-            instance = new Users(storage);
+            instance = new Users();
+            Users.storage = storage;
+            storage.sync(instance);
         }
     }
 
