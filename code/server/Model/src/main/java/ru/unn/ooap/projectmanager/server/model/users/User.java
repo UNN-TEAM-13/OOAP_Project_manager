@@ -1,6 +1,7 @@
 package ru.unn.ooap.projectmanager.server.model.users;
 
-public class User implements IUser {
+public class User implements IUser,
+        ru.unn.ooap.projectmanager.server.model.users.administrator.IUser {
     private int id;
     private String username;
     private String password;

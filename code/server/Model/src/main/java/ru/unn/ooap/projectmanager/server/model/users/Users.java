@@ -1,8 +1,11 @@
 package ru.unn.ooap.projectmanager.server.model.users;
 
 import ru.unn.ooap.projectmanager.server.model.IDAL;
-import ru.unn.ooap.projectmanager.server.model.users.administrator.IAdministrator;
+import ru.unn.ooap.projectmanager.server.model.users.administrator.Administrator;
+import ru.unn.ooap.projectmanager.server.model.users.executor.Executor;
+import ru.unn.ooap.projectmanager.server.model.users.manager.Manager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public final class Users {
@@ -41,19 +44,49 @@ public final class Users {
         Users.users = users;
     }
 
-    public IAdministrator createAdministrator() {
+    public Administrator createAdministrator() {
         return null;
     }
 
-    public IAdministrator createManager() {
+    public Manager createManager() {
         return null;
     }
 
-    public IAdministrator createExecutor() {
+    public Executor createExecutor() {
         return null;
     }
 
-    public List<? extends IUser> get() {
-        return users;
+    public List<User> get() {
+        return new ArrayList<>(users);
+    }
+
+    public List<Administrator> getAdministrators() {
+        List<Administrator> administrators = new ArrayList<>();
+        for (User user : users) {
+            if (user instanceof Administrator) {
+                administrators.add((Administrator) user);
+            }
+        }
+        return administrators;
+    }
+
+    public List<Manager> getManagers() {
+        List<Manager> managers = new ArrayList<>();
+        for (User user : users) {
+            if (user instanceof Manager) {
+                managers.add((Manager) user);
+            }
+        }
+        return managers;
+    }
+
+    public List<Executor> getExecutors() {
+        List<Executor> executors = new ArrayList<>();
+        for (User user : users) {
+            if (user instanceof Executor) {
+                executors.add((Executor) user);
+            }
+        }
+        return executors;
     }
 }
