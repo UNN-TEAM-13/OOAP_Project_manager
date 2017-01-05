@@ -24,7 +24,8 @@ public class ExecutorMainView extends WindowTitledPane implements IExecutorMainV
         return tasks;
     }
 
-    void initialize() {
-        setWindowTitle(WINDOW_TITLE);
+    @Override
+    public String getWindowTitle() {
+        return WINDOW_TITLE;
     }
 }

@@ -12,6 +12,7 @@ public class AdministratorMainView extends WindowTitledPane implements IAdminist
     private Pane content;
     @FXML
     private ListView users;
+
     @FXML
     private AdministratorMainPresenter presenter;
 
@@ -22,10 +23,15 @@ public class AdministratorMainView extends WindowTitledPane implements IAdminist
         return users;
     }
 
-    void initialize() {
-        setWindowTitle(WINDOW_TITLE);
-        presenter.setUser(((PMSStage) getStage()).getUser());
+    @Override
+    public String getWindowTitle() {
+        return WINDOW_TITLE;
     }
 
+    @Override
+    void initialize() {
+        super.initialize();
+        presenter.setUser(((PMSStage) getStage()).getUser());
+    }
 
 }

@@ -13,8 +13,8 @@ public class ManagerMainView extends WindowTitledPane implements IManagerMainVie
     @FXML
     private TreeView projects;
 
+    @FXML
     private ManagerMainPresenter presenter;
-
 
     private static final String WINDOW_TITLE = "PMS — Manager";
 
@@ -23,7 +23,8 @@ public class ManagerMainView extends WindowTitledPane implements IManagerMainVie
         return projects;
     }
 
-    void initialize() {
-        setWindowTitle(WINDOW_TITLE);
+    @Override
+    public String getWindowTitle() {
+        return WINDOW_TITLE;
     }
 }

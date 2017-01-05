@@ -2,6 +2,7 @@ package ru.unn.ooap.projectmanager.client.view;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,17 +15,31 @@ import ru.unn.ooap.projectmanager.server.model.users.User;
 
 import java.io.IOException;
 
-public class AuthMainView implements IAuthView {
+public class AuthMainView extends WindowTitledPane implements IAuthView {
     @FXML
     private TextField usernameTextField;
     @FXML
     private PasswordField passwordField;
     @FXML
     private Button loginButton;
+
     @FXML
     private AuthPresenter presenter;
 
+    private static final String WINDOW_TITLE = "PMS — Authentication";
+
+    @Override
+    Node getFakeNode() {
+        return usernameTextField;
+    }
+
+    @Override
+    String getWindowTitle() {
+        return WINDOW_TITLE;
+    }
+
     public void initialize() {
+        super.initialize();
         presenter.setView(this);
         loginButton.setOnAction(event -> presenter.auth());
         usernameTextField.textProperty().bindBidirectional(presenter.usernameProperty());
