@@ -4,16 +4,16 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
-import ru.unn.ooap.projectmanager.client.presenter.admin.IAdminMainView;
-import ru.unn.ooap.projectmanager.client.presenter.admin.AdminMainPresenter;
+import ru.unn.ooap.projectmanager.client.presenter.admin.IAdministratorMainView;
+import ru.unn.ooap.projectmanager.client.presenter.admin.AdministratorMainPresenter;
 
-public class AdministratorMainView extends WindowTitledPane implements IAdminMainView {
+public class AdministratorMainView extends WindowTitledPane implements IAdministratorMainView {
     @FXML
     private Pane content;
     @FXML
     private ListView users;
     @FXML
-    private AdminMainPresenter presenter;
+    private AdministratorMainPresenter presenter;
 
     private static final String WINDOW_TITLE = "PMS — Administrator";
 
