@@ -2,6 +2,7 @@ package ru.unn.ooap.projectmanager.client.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 import ru.unn.ooap.projectmanager.client.presenter.admin.IAdministratorMainView;
@@ -12,6 +13,12 @@ public class AdministratorMainView extends WindowTitledPane implements IAdminist
     private Pane content;
     @FXML
     private ListView users;
+    @FXML
+    private Button createAdministratorButton;
+    @FXML
+    private Button createManagerButton;
+    @FXML
+    private Button createExecutorButton;
 
     @FXML
     private AdministratorMainPresenter presenter;
@@ -32,6 +39,10 @@ public class AdministratorMainView extends WindowTitledPane implements IAdminist
     void initialize() {
         super.initialize();
         presenter.setUser(((PMSStage) getStage()).getUser());
+
+        createAdministratorButton.setOnAction(actionEvent -> presenter.createAdministrator());
+        createManagerButton.setOnAction(actionEvent -> presenter.createManager());
+        createExecutorButton.setOnAction(actionEvent -> presenter.createExecutor());
     }
 
 }
