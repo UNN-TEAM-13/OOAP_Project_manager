@@ -7,16 +7,22 @@ abstract class WindowTitledPane {
     abstract Node getFakeNode();
     abstract String getWindowTitle();
 
-    Stage getStage() {
+    protected Stage getStage() {
+        System.out.print("setStage invocation");
         return (Stage) getFakeNode().getScene().getWindow();
     }
 
-    void setWindowTitle(final String title) {
-        Stage stage = (Stage) getFakeNode().getScene().getWindow();
-        stage.setTitle(title);
+    protected void setWindowTitle(final String title) {
+        System.out.print("setWindowTitle invocation");
+        getStage().setTitle(title);
+        System.out.print("Now stage title is: " + getStage().getTitle());
     }
 
-    void initialize() {
+    protected void initialize() {
+        // Need rewrite — initialization runs before stage assignment
+        // also, i do not know why, initialization for WindowTitledPane subclasses
+        // just DO NOT RUNS at all
+
         setWindowTitle(getWindowTitle());
     }
 }

@@ -27,4 +27,10 @@ public class ManagerMainView extends WindowTitledPane implements IManagerMainVie
     public String getWindowTitle() {
         return WINDOW_TITLE;
     }
+
+    @Override
+    protected void initialize() {
+        System.out.print("ManagerMainView.initialize invocation");
+        setWindowTitle(WINDOW_TITLE);
+    }
 }

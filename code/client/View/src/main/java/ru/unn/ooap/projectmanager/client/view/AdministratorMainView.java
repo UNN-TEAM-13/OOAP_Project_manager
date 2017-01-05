@@ -29,8 +29,8 @@ public class AdministratorMainView extends WindowTitledPane implements IAdminist
     }
 
     @Override
-    void initialize() {
-        super.initialize();
+    protected void initialize() {
+        setWindowTitle(WINDOW_TITLE);
         presenter.setUser(((PMSStage) getStage()).getUser());
     }
 
