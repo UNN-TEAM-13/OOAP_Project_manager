@@ -1,0 +1,28 @@
+CREATE TABLE Task(
+    ID INTEGER PRIMARY KEY,
+    Title TEXT NOT NULL,
+    Description TEXT NOT NULL
+);
+
+CREATE TABLE Project(
+    ID INTEGER PRIMARY KEY,
+    Title TEXT NOT NULL,
+);
+
+CREATE TABLE User(
+    ID INTEGER PRIMARY KEY;
+    Username TEXT NOT NULL,
+    Password TEXT NOT NULL
+);
+
+CREATE TABLE Task_Project_lnk(
+    ID INTEGER PRIMARY KEY,
+    TaskID INTEGER REFERENCES Task(ID),
+    ProjectID INTEGER REFERENCES Project(ID)
+);
+
+CREATE TABLE Task_Executor_lnk(
+    ID INTEGER PRIMARY KEY,
+    TaskID INTEGER REFERENCES Task(ID),
+    ExecutorID INTEGER REFERENCES User(ID)
+);
