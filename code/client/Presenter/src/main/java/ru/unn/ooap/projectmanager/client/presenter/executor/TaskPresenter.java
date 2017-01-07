@@ -2,19 +2,19 @@ package ru.unn.ooap.projectmanager.client.presenter.executor;
 
 import javafx.beans.property.*;
 import ru.unn.ooap.projectmanager.server.model.users.executor.IExecutor;
+import ru.unn.ooap.projectmanager.server.model.users.executor.ITask;
 
 public class TaskPresenter {
     private ITaskView view;
     private IExecutor executor;
+    private ITask task;
 
-    private final StringProperty spentTimeReport = new SimpleStringProperty();
-    private final StringProperty title = new SimpleStringProperty();
-    private final StringProperty description = new SimpleStringProperty();
-    private final DoubleProperty givenHours = new SimpleDoubleProperty();
-    private final StringProperty givenHoursText = new SimpleStringProperty();
-    private final DoubleProperty spentHours = new SimpleDoubleProperty();
-    private final StringProperty spentHoursText = new SimpleStringProperty();
-    private final IntegerProperty spentHoursPercent = new SimpleIntegerProperty();
+    private final StringProperty spentTimeReport = new SimpleStringProperty("");
+    private final StringProperty title = new SimpleStringProperty("");
+    private final StringProperty description = new SimpleStringProperty("");
+    private final StringProperty givenHoursText = new SimpleStringProperty("");
+    private final StringProperty spentHoursText = new SimpleStringProperty("");
+    private final DoubleProperty spentHoursPercent = new SimpleDoubleProperty();
 
     public void setView(final ITaskView view) {
         this.view = view;
@@ -30,6 +30,19 @@ public class TaskPresenter {
 
     public IExecutor getExecutor() {
         return executor;
+    }
+
+    public void setTask(final ITask task) {
+        this.task = task;
+        title.set(task.getTitle());
+        description.set(task.getDescription());
+        givenHoursText.set(Double.toString(task.getGivenHours()));
+        spentHoursText.set(Double.toString(task.getSpentHours()));
+        spentHoursPercent.set(task.getSpentHours() / task.getGivenHours());
+    }
+
+    public ITask getTask() {
+        return task;
     }
 
     public StringProperty spendTimeReportProperty() {
@@ -68,11 +81,11 @@ public class TaskPresenter {
         return spentHoursText.get();
     }
 
-    public IntegerProperty spentHoursPercentProperty() {
+    public DoubleProperty spentHoursPercentProperty() {
         return spentHoursPercent;
     }
 
-    public Integer getSpentHoursPercent() {
+    public Double getSpentHoursPercent() {
         return spentHoursPercent.get();
     }
 }

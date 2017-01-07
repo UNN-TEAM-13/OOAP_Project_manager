@@ -62,8 +62,6 @@ public class ManagerMainPresenter implements IUserMainPresenter {
                 view.showTask((ITask) object);
             } else if (object instanceof IProject) {
                 view.showProject((IProject) object);
-            } else {
-                System.out.println("Out of plan" + object.getClass().toString());
             }
         } catch (IOException e) {
             // here set status

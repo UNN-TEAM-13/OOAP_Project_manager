@@ -10,6 +10,8 @@ import ru.unn.ooap.projectmanager.server.model.users.IUser;
 import ru.unn.ooap.projectmanager.server.model.users.executor.IExecutor;
 import ru.unn.ooap.projectmanager.server.model.users.executor.ITask;
 
+import java.io.IOException;
+
 public class ExecutorMainPresenter implements IUserMainPresenter {
     private IExecutor user;
     private IExecutorMainView view;
@@ -41,5 +43,13 @@ public class ExecutorMainPresenter implements IUserMainPresenter {
 
     public ObjectProperty<ObservableList<ITask>> tasksProperty() {
         return tasks;
+    }
+
+    public void setSelectedTask(final ITask task) {
+        try {
+            view.showTask(task);
+        } catch (IOException e) {
+            // set bad status
+        }
     }
 }
