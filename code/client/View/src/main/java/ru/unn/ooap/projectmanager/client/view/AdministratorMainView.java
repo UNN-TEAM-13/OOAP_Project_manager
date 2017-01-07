@@ -8,7 +8,7 @@ import javafx.scene.layout.Pane;
 import ru.unn.ooap.projectmanager.client.presenter.admin.IAdministratorMainView;
 import ru.unn.ooap.projectmanager.client.presenter.admin.AdministratorMainPresenter;
 
-public class AdministratorMainView extends WindowTitledPane implements IAdministratorMainView {
+public class AdministratorMainView extends UserMainView implements IAdministratorMainView {
     @FXML
     private Pane content;
     @FXML
@@ -23,23 +23,13 @@ public class AdministratorMainView extends WindowTitledPane implements IAdminist
     @FXML
     private AdministratorMainPresenter presenter;
 
-    private static final String WINDOW_TITLE = "PMS — Administrator";
-
     @Override
-    Node getFakeNode() {
+    Node getNode() {
         return users;
     }
 
-    @Override
-    public String getWindowTitle() {
-        return WINDOW_TITLE;
-    }
-
-    @Override
     void initialize() {
-        super.initialize();
-        presenter.setUser(((PMSStage) getStage()).getUser());
-
+        presenter.setView(this);
         createAdministratorButton.setOnAction(actionEvent -> presenter.createAdministrator());
         createManagerButton.setOnAction(actionEvent -> presenter.createManager());
         createExecutorButton.setOnAction(actionEvent -> presenter.createExecutor());

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class Users {
-    private static Users instance = null;
+    private static Users instance;
     private static IDAL storage;
     private static List<User> users;
 

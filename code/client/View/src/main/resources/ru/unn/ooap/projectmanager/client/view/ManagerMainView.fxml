@@ -3,8 +3,19 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+
+<?import ru.unn.ooap.projectmanager.client.presenter.manager.ManagerMainPresenter?>
 
 <HBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.unn.ooap.projectmanager.client.view.ManagerMainView">
-    <TreeView fx:id="projects"/>
+    <fx:define>
+        <ManagerMainPresenter fx:id="presenter"/>
+    </fx:define>
+    <VBox>
+        <Button fx:id="createProjectButton" text="Добавить проект"/>
+        <Button fx:id="createTaskButton" text="Добавить задачу"/>
+        <TreeView fx:id="projects"/>
+    </VBox>
     <Pane fx:id="content"/>
 </HBox>

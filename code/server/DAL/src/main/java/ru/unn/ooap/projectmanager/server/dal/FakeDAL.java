@@ -5,6 +5,7 @@ import ru.unn.ooap.projectmanager.server.model.IDAL;
 import ru.unn.ooap.projectmanager.server.model.tasks.Task;
 import ru.unn.ooap.projectmanager.server.model.projects.Project;
 import ru.unn.ooap.projectmanager.server.model.projects.Projects;
+import ru.unn.ooap.projectmanager.server.model.tasks.Tasks;
 import ru.unn.ooap.projectmanager.server.model.users.User;
 import ru.unn.ooap.projectmanager.server.model.users.Users;
 import ru.unn.ooap.projectmanager.server.model.users.administrator.Administrator;
@@ -33,6 +34,11 @@ public class FakeDAL implements IDAL {
     @Override
     public void sync(final Task task) {
         String str = new String("test");
+    }
+
+    @Override
+    public void sync(final Tasks tasks) {
+        // Tasks synchronization
     }
 
     @Override

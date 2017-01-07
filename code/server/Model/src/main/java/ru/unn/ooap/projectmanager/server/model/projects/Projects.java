@@ -5,9 +5,9 @@ import ru.unn.ooap.projectmanager.server.model.IDAL;
 import java.util.List;
 
 public final class Projects {
-    private static Projects instance = null;
-    private List<Project> projects;
+    private static Projects instance;
     private final IDAL storage;
+    private List<Project> projects;
 
     private Projects(final IDAL storage) {
         this.storage = storage;
@@ -15,7 +15,7 @@ public final class Projects {
     }
 
     public static void init(final IDAL storage) {
-        synchronized (instance) {
+        synchronized (Projects.class) {
             if (instance != null) {
                 throw new AssertionError("Already initialized");
             }
