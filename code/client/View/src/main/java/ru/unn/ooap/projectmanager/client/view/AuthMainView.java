@@ -10,11 +10,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import ru.unn.ooap.projectmanager.client.presenter.IAuthView;
 import ru.unn.ooap.projectmanager.client.presenter.AuthPresenter;
-import ru.unn.ooap.projectmanager.server.model.users.User;
+import ru.unn.ooap.projectmanager.server.model.users.IUser;
 
 import java.io.IOException;
 
-public class AuthMainView  implements IAuthView {
+public class AuthMainView implements IAuthView {
     @FXML
     private TextField usernameTextField;
     @FXML
@@ -25,6 +25,8 @@ public class AuthMainView  implements IAuthView {
     @FXML
     private AuthPresenter presenter;
 
+    private IUser user;
+
     public void initialize() {
         presenter.setView(this);
         loginButton.setOnAction(event -> presenter.auth());
@@ -33,15 +35,19 @@ public class AuthMainView  implements IAuthView {
     }
 
     @Override
-    public void setUser(final User user) {
-        PMSStage currStage = (PMSStage) loginButton.getScene().getWindow();
-        currStage.setUser(user);
+    public void setUser(final IUser user) {
+        //PMSStage currStage = (PMSStage) loginButton.getScene().getWindow();
+        //currStage.setUser(user);
+        this.user = user;
     }
 
     @Override
     public void showScene(final String fxmlMarkup) throws IOException {
         Stage currStage = (Stage) loginButton.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource(fxmlMarkup));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlMarkup));
+        Parent root = loader.load();
+        UserMainView controller = loader.<UserMainView>getController();
+        controller.initUser(user);
         currStage.setMaxHeight(Double.MAX_VALUE);
         currStage.setMinHeight(Double.MIN_VALUE);
         currStage.setScene(new Scene(root));

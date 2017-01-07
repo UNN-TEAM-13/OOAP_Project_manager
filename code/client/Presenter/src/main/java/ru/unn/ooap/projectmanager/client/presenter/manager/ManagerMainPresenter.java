@@ -2,6 +2,7 @@ package ru.unn.ooap.projectmanager.client.presenter.manager;
 
 import ru.unn.ooap.projectmanager.client.presenter.IUserMainPresenter;
 import ru.unn.ooap.projectmanager.client.presenter.IUserMainView;
+import ru.unn.ooap.projectmanager.server.model.users.IUser;
 import ru.unn.ooap.projectmanager.server.model.users.manager.IManager;
 
 public class ManagerMainPresenter implements IUserMainPresenter {
@@ -11,11 +12,15 @@ public class ManagerMainPresenter implements IUserMainPresenter {
     @Override
     public void setView(final IUserMainView view) {
         this.view = (IManagerMainView) view;
-        user = (IManager) view.getUser();
     }
 
     IManagerMainView getView() {
         return view;
+    }
+
+    public void setUser(final IUser user) {
+        this.user = (IManager) user;
+        //here load projects and tasks
     }
 
     IManager getUser() {

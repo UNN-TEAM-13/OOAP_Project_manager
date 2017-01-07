@@ -29,6 +29,12 @@ public class FakeDAL implements IDAL {
         testExecutor.setPassword(" ");
         usersList.add(testExecutor);
 
+        Administrator testAdministrator = new Administrator();
+        testAdministrator.setId(testExecutor.getID() + 1);
+        testAdministrator.setUsername("TestAdministrator");
+        testAdministrator.setPassword(" ");
+        usersList.add(testAdministrator);
+
         Task testTask1 = new Task();
         testTask1.setTitle("Test task 1");
         testTask1.setExecutor(testExecutor);

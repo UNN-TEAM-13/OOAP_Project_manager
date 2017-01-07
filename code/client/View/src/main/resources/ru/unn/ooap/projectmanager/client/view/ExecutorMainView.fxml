@@ -4,7 +4,12 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.Pane?>
 
+<?import ru.unn.ooap.projectmanager.client.presenter.executor.ExecutorMainPresenter?>
+
 <HBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.unn.ooap.projectmanager.client.view.ExecutorMainView">
-    <ListView fx:id="tasks"/>
+    <fx:define>
+        <ExecutorMainPresenter fx:id="presenter"/>
+    </fx:define>
+    <ListView fx:id="tasks" items="${presenter.tasks}"/>
     <Pane fx:id="content"/>
 </HBox>

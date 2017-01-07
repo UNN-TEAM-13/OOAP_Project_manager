@@ -1,12 +1,12 @@
 package ru.unn.ooap.projectmanager.client.view;
 
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 import ru.unn.ooap.projectmanager.client.presenter.admin.IAdministratorMainView;
 import ru.unn.ooap.projectmanager.client.presenter.admin.AdministratorMainPresenter;
+import ru.unn.ooap.projectmanager.server.model.users.IUser;
 
 public class AdministratorMainView extends UserMainView implements IAdministratorMainView {
     @FXML
@@ -23,11 +23,6 @@ public class AdministratorMainView extends UserMainView implements IAdministrato
     @FXML
     private AdministratorMainPresenter presenter;
 
-    @Override
-    Node getNode() {
-        return users;
-    }
-
     void initialize() {
         presenter.setView(this);
         createAdministratorButton.setOnAction(actionEvent -> presenter.createAdministrator());
@@ -35,4 +30,8 @@ public class AdministratorMainView extends UserMainView implements IAdministrato
         createExecutorButton.setOnAction(actionEvent -> presenter.createExecutor());
     }
 
+    @Override
+    public void initUser(final IUser user) {
+        presenter.setUser(user);
+    }
 }

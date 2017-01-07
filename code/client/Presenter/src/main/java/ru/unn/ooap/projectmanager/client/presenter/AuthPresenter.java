@@ -61,7 +61,7 @@ public class AuthPresenter {
             } else if (user instanceof IManager) {
                 view.showScene("ManagerMainView.fxml");
             } else if (user instanceof IAdministrator) {
-                view.showScene("AdminMainView.fxml");
+                view.showScene("AdministratorMainView.fxml");
             } else if (user == null) {
                 status.set("Ошибка: введены неправильные данные");
             } else {

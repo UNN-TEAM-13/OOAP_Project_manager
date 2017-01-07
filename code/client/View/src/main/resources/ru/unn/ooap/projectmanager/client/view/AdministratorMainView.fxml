@@ -3,16 +3,21 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.Pane?>
-
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Button?>
+
+<?import ru.unn.ooap.projectmanager.client.presenter.admin.AdministratorMainPresenter?>
+
 <HBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.unn.ooap.projectmanager.client.view.AdministratorMainView">
+    <fx:define>
+        <AdministratorMainPresenter fx:id="presenter"/>
+    </fx:define>
     <VBox>
         <!-- Different buttons easier then create new window with ChoseBox -->
         <Button fx:id="createAdministratorButton" text="Добавить администратора" />
         <Button fx:id="createManagerButton" text="Добавить менеджера" />
         <Button fx:id="createExecutorButton" text="Добавить исполнителя" />
-        <ListView fx:id="users"/>
+        <ListView fx:id="users" items="${presenter.users}"/>
     </VBox>
     <Pane fx:id="content"/>
 </HBox>
