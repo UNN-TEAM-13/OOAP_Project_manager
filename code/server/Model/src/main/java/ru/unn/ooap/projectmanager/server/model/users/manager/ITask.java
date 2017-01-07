@@ -1,5 +1,6 @@
 package ru.unn.ooap.projectmanager.server.model.users.manager;
 
+import ru.unn.ooap.projectmanager.server.model.projects.Project;
 import ru.unn.ooap.projectmanager.server.model.users.executor.Executor;
 
 public interface ITask extends ru.unn.ooap.projectmanager.server.model.tasks.ITask {
@@ -13,6 +14,8 @@ public interface ITask extends ru.unn.ooap.projectmanager.server.model.tasks.ITa
     double getLeftHours();
     Executor getExecutor();
     void setExecutor(Executor executor);
+    Project getProject();
+    void setProject(Project project);
     boolean isDone();
     boolean isOpen();
     void close();

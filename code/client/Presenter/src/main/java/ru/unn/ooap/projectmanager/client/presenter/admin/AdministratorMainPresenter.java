@@ -1,20 +1,22 @@
 package ru.unn.ooap.projectmanager.client.presenter.admin;
 
-import ru.unn.ooap.projectmanager.client.presenter.UserScenePresenter;
+import ru.unn.ooap.projectmanager.client.presenter.IUserMainPresenter;
+import ru.unn.ooap.projectmanager.client.presenter.IUserMainView;
 import ru.unn.ooap.projectmanager.server.model.users.administrator.IAdministrator;
 import ru.unn.ooap.projectmanager.server.model.users.administrator.IUser;
 
-public class AdministratorMainPresenter implements UserScenePresenter {
+public class AdministratorMainPresenter implements IUserMainPresenter {
     private IAdministrator user;
+    private IAdministratorMainView view;
 
     @Override
-    public ru.unn.ooap.projectmanager.server.model.users.IUser getUser() {
-        return user;
+    public void setView(final IUserMainView view) {
+        this.view = (IAdministratorMainView) view;
+        user = (IAdministrator) view.getUser();
     }
 
-    @Override
-    public void setUser(final ru.unn.ooap.projectmanager.server.model.users.IUser user) {
-        this.user = (IAdministrator) user;
+    IAdministratorMainView getView() {
+        return view;
     }
 
     private void showUserView(final IUser user) {

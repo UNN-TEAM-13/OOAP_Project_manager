@@ -1,19 +1,24 @@
 package ru.unn.ooap.projectmanager.client.presenter.executor;
 
-import ru.unn.ooap.projectmanager.client.presenter.UserScenePresenter;
-import ru.unn.ooap.projectmanager.server.model.users.IUser;
-import ru.unn.ooap.projectmanager.server.model.users.executor.Executor;
+import ru.unn.ooap.projectmanager.client.presenter.IUserMainPresenter;
+import ru.unn.ooap.projectmanager.client.presenter.IUserMainView;
+import ru.unn.ooap.projectmanager.server.model.users.executor.IExecutor;
 
-public class ExecutorMainPresenter implements UserScenePresenter {
-    private Executor user;
+public class ExecutorMainPresenter implements IUserMainPresenter {
+    private IExecutor user;
+    private IExecutorMainView view;
 
     @Override
-    public IUser getUser() {
-        return user;
+    public void setView(final IUserMainView view) {
+        this.view = (IExecutorMainView) view;
+        user = (IExecutor) view.getUser();
     }
 
-    @Override
-    public void setUser(final IUser user) {
-        this.user = (Executor) user;
+    IExecutorMainView getView() {
+        return view;
+    }
+
+    IExecutor getUser() {
+        return user;
     }
 }

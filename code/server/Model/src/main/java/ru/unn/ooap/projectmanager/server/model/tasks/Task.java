@@ -1,21 +1,26 @@
 package ru.unn.ooap.projectmanager.server.model.tasks;
 
+import ru.unn.ooap.projectmanager.server.model.projects.Project;
 import ru.unn.ooap.projectmanager.server.model.users.executor.Executor;
 
 public class Task implements ru.unn.ooap.projectmanager.server.model.users.executor.ITask,
         ru.unn.ooap.projectmanager.server.model.users.manager.ITask {
 
+    /*
+     As we work with objects directly, we don't need IDs for Task, Project and User,
+     */
     private int id;
     private String title;
     private String description;
     private Executor executor;
+    private Project project;
     private double givenHours;
     private double spentHours;
     private boolean open;
     private boolean done;
 
-    public Task(final String title) {
-        this.title = title;
+    public Task() {
+        // initialisation
     }
 
     @Override
@@ -51,6 +56,16 @@ public class Task implements ru.unn.ooap.projectmanager.server.model.users.execu
     @Override
     public Executor getExecutor() {
         return executor;
+    }
+
+    @Override
+    public void setProject(final Project project) {
+        this.project = project;
+    }
+
+    @Override
+    public Project getProject() {
+        return project;
     }
 
     @Override

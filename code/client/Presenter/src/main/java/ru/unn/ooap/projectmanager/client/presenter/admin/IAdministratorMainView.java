@@ -1,4 +1,6 @@
 package ru.unn.ooap.projectmanager.client.presenter.admin;
 
-public interface IAdministratorMainView {
+import ru.unn.ooap.projectmanager.client.presenter.IUserMainView;
+
+public interface IAdministratorMainView extends IUserMainView {
 }

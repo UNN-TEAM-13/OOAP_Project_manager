@@ -8,7 +8,7 @@ import ru.unn.ooap.projectmanager.client.presenter.executor.IExecutorMainView;
 import ru.unn.ooap.projectmanager.client.presenter.executor.ExecutorMainPresenter;
 
 
-public class ExecutorMainView extends WindowTitledPane implements IExecutorMainView {
+public class ExecutorMainView extends UserMainView implements IExecutorMainView {
     @FXML
     private Pane content;
     @FXML
@@ -17,15 +17,12 @@ public class ExecutorMainView extends WindowTitledPane implements IExecutorMainV
     @FXML
     private ExecutorMainPresenter presenter;
 
-    private static final String WINDOW_TITLE = "PMS — Executor";
-
     @Override
-    Node getFakeNode() {
+    Node getNode() {
         return tasks;
     }
 
-    @Override
-    public String getWindowTitle() {
-        return WINDOW_TITLE;
+    void initialize() {
+        presenter.setView(this);
     }
 }
