@@ -28,13 +28,13 @@ public final class Projects {
     }
 
     public Project create() {
-        Project project = new Project();
+        Project project = new Project(storage);
         projects.add(project);
         storage.sync(this);
         return project;
     }
 
-    public List<Project> getAll() {
+    public List<Project> get() {
         return projects;
     }
 
@@ -44,13 +44,6 @@ public final class Projects {
 
     public List<Project> getClosed() {
         return null;
-    }
-
-    Project createProject() {
-        Project project = new Project();
-        storage.sync(project);
-        storage.sync(this);
-        return project;
     }
 
     public void setProjects(final List<Project> projects) {

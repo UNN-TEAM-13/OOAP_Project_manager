@@ -35,26 +35,30 @@ public class FakeDAL implements IDAL {
         testAdministrator.setPassword(" ");
         usersList.add(testAdministrator);
 
-        Task testTask1 = new Task();
-        testTask1.setTitle("Test task 1");
-        testTask1.setExecutor(testExecutor);
-        Task testTask2 = new Task();
-        testTask2.setTitle("Test task 2");
-        testTask2.setExecutor(testExecutor);
-        tasksList.add(testTask1);
-        tasksList.add(testTask2);
 
-        Project project = new Project();
+        Project project = new Project(this);
         project.setTitle("Test Project");
         project.setDescription("Project, created just to proof of work");
         projectsList.add(project);
 
+        Task testTask1 = new Task();
+        testTask1.setTitle("Test task 1");
+        testTask1.setExecutor(testExecutor);
+        testTask1.setProject(project);
+        project.addTask(testTask1);
+        tasksList.add(testTask1);
 
+        Task testTask2 = new Task();
+        testTask2.setTitle("Test task 2");
+        testTask2.setExecutor(testExecutor);
+        testTask2.setProject(project);
+        project.addTask(testTask2);
+        tasksList.add(testTask2);
     }
 
     @Override
     public void sync(final Project project) {
-        project.setTitle("Test");
+        //
     }
 
     @Override
