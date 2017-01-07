@@ -10,8 +10,8 @@ public class ProjectPresenter {
     private IProjectView view;
     private IProject project;
 
-    private final StringProperty titleText = new SimpleStringProperty();
-    private final StringProperty descriptionText = new SimpleStringProperty();
+    private final StringProperty titleText = new SimpleStringProperty("");
+    private final StringProperty descriptionText = new SimpleStringProperty("");
     private final BooleanProperty applyButtonDisabled = new SimpleBooleanProperty();
     private final ObjectProperty<ObservableList<ITask>> tasks
             = new SimpleObjectProperty<>(FXCollections.observableArrayList());
@@ -30,6 +30,9 @@ public class ProjectPresenter {
 
     public void setProject(final IProject project) {
         this.project = project;
+        titleText.set(project.getTitle());
+        descriptionText.set(project.getDescription());
+        tasks.set(FXCollections.observableArrayList(project.getTasks()));
     }
 
     public IProject getProject() {

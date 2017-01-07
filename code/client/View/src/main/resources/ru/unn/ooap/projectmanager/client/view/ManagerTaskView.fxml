@@ -18,7 +18,7 @@
     <TextField fx:id="description" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
     <Label text="Дано времени: " GridPane.rowIndex="3" GridPane.columnIndex="1"/>
     <TextField fx:id="givenHoursTextField" GridPane.rowIndex="3" GridPane.columnIndex="2" text="0"/>
-    <Label text="Потрачено времени: " GridPane.rowIndex="4" GridPane.columnIndex="1"/>
-    <ProgressBar fx:id="spentHoursProgressBar" progress="${presenter.spentHoursPercent}" GridPane.rowIndex="4" GridPane.columnIndex="2" />
-    <Button fx:id="apply" text="Применить" disable="${presenter.applyButtonDisable}" />
+    <Label text="Потрачено времени: " disable="${presenter.hideProgressInfo}" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+    <ProgressBar fx:id="spentHoursProgressBar" progress="${presenter.spentHoursPercent}" disable="${presenter.hideProgressInfo}" GridPane.rowIndex="4" GridPane.columnIndex="2" />
+    <Button fx:id="apply" text="Применить" disable="${presenter.applyButtonDisable}" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
 </GridPane>

@@ -10,6 +10,8 @@ import ru.unn.ooap.projectmanager.server.model.users.manager.IManager;
 import ru.unn.ooap.projectmanager.server.model.users.manager.IProject;
 import ru.unn.ooap.projectmanager.server.model.users.manager.ITask;
 
+import java.io.IOException;
+
 public class ManagerMainPresenter implements IUserMainPresenter {
     private IManager user;
     private IManagerMainView view;
@@ -52,6 +54,20 @@ public class ManagerMainPresenter implements IUserMainPresenter {
 
     public ObjectProperty<TreeItem<Object>> rootProperty() {
         return root;
+    }
+
+    public void setSelected(final Object object) {
+        try {
+            if (object instanceof ITask) {
+                view.showTask((ITask) object);
+            } else if (object instanceof IProject) {
+                view.showProject((IProject) object);
+            } else {
+                System.out.println("Out of plan" + object.getClass().toString());
+            }
+        } catch (IOException e) {
+            // here set status
+        }
     }
 
     public void createTask() {

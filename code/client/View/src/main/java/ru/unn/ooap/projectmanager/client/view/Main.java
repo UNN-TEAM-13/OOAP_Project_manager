@@ -18,7 +18,7 @@ public class Main extends Application {
         Projects.init(primaryStage.getStorage());
         Tasks.init(primaryStage.getStorage());
         Parent root = FXMLLoader.load(getClass().getResource("AuthMainView.fxml"));
-        primaryStage.setTitle("Аутентификация");
+        primaryStage.setTitle("PMS");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
 

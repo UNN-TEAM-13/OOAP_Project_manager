@@ -2,15 +2,15 @@
 
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
 
 <?import ru.unn.ooap.projectmanager.client.presenter.admin.UserPresenter?>
 
-<?import javafx.scene.control.Button?>
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.unn.ooap.projectmanager.client.view.AdministratorUserView">
     <fx:define>
         <UserPresenter fx:id="presenter"/>
     </fx:define>
     <TextField fx:id="username"/>
     <TextField fx:id="password"/>
-    <Button fx:id="applyButton" text="Применить" />
+    <Button fx:id="applyButton" text="Применить" disable="${presenter.applyButtonDisabled}"/>
 </VBox>
