@@ -123,4 +123,9 @@ public class Task implements ru.unn.ooap.projectmanager.server.model.users.execu
     public void close() {
         open = false;
     }
+
+    @Override
+    public String toString() {
+        return title;
+    }
 }

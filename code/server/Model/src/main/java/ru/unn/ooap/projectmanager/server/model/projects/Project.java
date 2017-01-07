@@ -46,4 +46,9 @@ public class Project implements IProject {
         tasks.add(task);
         storage.sync(this);
     }
+
+    @Override
+    public String toString() {
+        return title;
+    }
 }

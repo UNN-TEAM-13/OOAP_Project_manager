@@ -71,4 +71,7 @@ public final class Tasks {
         return tasksOfExecutor;
     }
 
+    public void setTasks(final List<Task> tasks) {
+        this.tasks = tasks;
+    }
 }

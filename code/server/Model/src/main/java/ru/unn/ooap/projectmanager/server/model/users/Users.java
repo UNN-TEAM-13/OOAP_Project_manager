@@ -40,7 +40,7 @@ public final class Users {
         return null;
     }
 
-    public static void setUsers(final List<User> users) {
+    public void setUsers(final List<User> users) {
         Users.users = users;
     }
 

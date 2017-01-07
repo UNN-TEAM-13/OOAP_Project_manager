@@ -16,6 +16,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FakeDAL implements IDAL {
+    private final List<User> usersList = new ArrayList<>();
+    private final List<Project> projectsList = new ArrayList<>();
+    private final List<Task> tasksList = new ArrayList<>();
+
+    public FakeDAL() {
+        usersList.add(new Manager(1, "TestManager", " "));
+
+        Executor testExecutor = new Executor();
+        testExecutor.setId(2);
+        testExecutor.setUsername("TestExecutor");
+        testExecutor.setPassword(" ");
+        usersList.add(testExecutor);
+
+        Task testTask1 = new Task();
+        testTask1.setTitle("Test task 1");
+        testTask1.setExecutor(testExecutor);
+        Task testTask2 = new Task();
+        testTask2.setTitle("Test task 2");
+        testTask2.setExecutor(testExecutor);
+        tasksList.add(testTask1);
+        tasksList.add(testTask2);
+
+        Project project = new Project();
+        project.setTitle("Test Project");
+        project.setDescription("Project, created just to proof of work");
+        projectsList.add(project);
+
+
+    }
+
     @Override
     public void sync(final Project project) {
         project.setTitle("Test");
@@ -23,11 +53,6 @@ public class FakeDAL implements IDAL {
 
     @Override
     public void sync(final Projects projects) {
-        List<Project> projectsList = new ArrayList<>();
-        Project project = new Project();
-        project.setTitle("Test Project");
-        project.setDescription("Project, created just to proof of work");
-        projectsList.add(project);
         projects.setProjects(projectsList);
     }
 
@@ -38,7 +63,7 @@ public class FakeDAL implements IDAL {
 
     @Override
     public void sync(final Tasks tasks) {
-        // Tasks synchronization
+        tasks.setTasks(tasksList);
     }
 
     @Override
@@ -48,14 +73,6 @@ public class FakeDAL implements IDAL {
 
     @Override
     public void sync(final Users users) {
-        List<User> usersList = new ArrayList<User>();
-        usersList.add(new Manager(1, "TestManager", " "));
-
-        Executor testExecutor = new Executor();
-        testExecutor.setId(2);
-        testExecutor.setUsername("TestExecutor");
-        testExecutor.setPassword(" ");
-        usersList.add(testExecutor);
         users.setUsers(usersList);
     }
 
