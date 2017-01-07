@@ -9,6 +9,8 @@ import ru.unn.ooap.projectmanager.client.presenter.IUserMainView;
 import ru.unn.ooap.projectmanager.server.model.users.administrator.IAdministrator;
 import ru.unn.ooap.projectmanager.server.model.users.administrator.IUser;
 
+import java.io.IOException;
+
 public class AdministratorMainPresenter implements IUserMainPresenter {
     private IAdministrator user;
     private IAdministratorMainView view;
@@ -39,12 +41,17 @@ public class AdministratorMainPresenter implements IUserMainPresenter {
     }
 
     private void showUserView(final IUser user) {
-        /*
-        here we show in the view's content-pane AdministratorUserView
-        also, we should pass there this presenter and set here that
+        try {
+            view.showUser(user);
+        } catch (IOException e) {
+            //here we have to set status
+            e.printStackTrace();
+        }
 
-        in fact we just need to pass to AdministratorUserView IUser, that we want to represent
-         */
+    }
+
+    public void setSelectedUser(final IUser user) {
+        showUserView(user);
     }
 
     public void createAdministrator() {

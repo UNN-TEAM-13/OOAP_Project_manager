@@ -3,6 +3,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.TextField?>
 
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.unn.ooap.projectmanager.client.view.UserView">
-    <TextField fx:id="username"/>
+<?import ru.unn.ooap.projectmanager.client.presenter.admin.UserPresenter?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.unn.ooap.projectmanager.client.view.AdministratorUserView">
+    <fx:define>
+        <UserPresenter fx:id="presenter"/>
+    </fx:define>
+    <TextField fx:id="username" text="${presenter.username}"/>
 </VBox>
