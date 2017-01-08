@@ -11,6 +11,9 @@ import ru.unn.ooap.projectmanager.server.model.users.executor.Executor;
 import ru.unn.ooap.projectmanager.server.model.users.manager.Manager;
 
 public interface IDAL {
+    void setUsers(Users users);
+    void setProjects(Projects projects);
+    void setTasks(Tasks tasks);
     void sync(Project project);
     void sync(Projects projects);
     void sync(Task task);

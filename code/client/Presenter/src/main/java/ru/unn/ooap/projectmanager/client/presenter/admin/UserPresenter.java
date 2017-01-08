@@ -10,30 +10,20 @@ public class UserPresenter {
     private IUser user;
     private final StringProperty username = new SimpleStringProperty("");
     private final StringProperty password = new SimpleStringProperty("");
-    private final BooleanProperty applyButtonDisabled = new SimpleBooleanProperty();
+    private final BooleanProperty applyUsernameButtonDisabled = new SimpleBooleanProperty();
+    private final BooleanProperty applyPasswordButtonDisabled = new SimpleBooleanProperty();
 
     public UserPresenter() {
-        username.addListener((observable, oldValue, newValue) -> validateInput());
-        password.addListener((observable, oldValue, newValue) -> validateInput());
-        validateInput();
+        username.addListener((observable, oldValue, newValue) -> validateUsername());
+        password.addListener((observable, oldValue, newValue) -> validatePassword());
     }
 
-    private boolean isUsernameValid() {
-        return !username.get().equals("");
+    private void validateUsername() {
+        applyUsernameButtonDisabled.set(username.get().equals(""));
     }
 
-    private boolean isPasswordValid() {
-        return !password.get().equals("");
-    }
-
-    private void validateInput() {
-        if (isUsernameValid() && isPasswordValid()) {
-            applyButtonDisabled.set(false);
-            // here set corresponding status
-        } else {
-            applyButtonDisabled.set(true);
-            // here set corresponding statuses
-        }
+    private void validatePassword() {
+        applyPasswordButtonDisabled.set(password.get().equals(""));
     }
 
     public void setUser(final IUser user) {
@@ -61,26 +51,35 @@ public class UserPresenter {
         return password;
     }
 
-    public boolean getApplyButtonDisabled() {
-        return applyButtonDisabled.get();
+    public boolean getApplyUsernameButtonDisabled() {
+        return applyUsernameButtonDisabled.get();
     }
 
-    public BooleanProperty applyButtonDisabledProperty() {
-        return applyButtonDisabled;
+    public BooleanProperty applyUsernameButtonDisabledProperty() {
+        return applyUsernameButtonDisabled;
     }
 
-    public void apply() {
-        /*
-        transaction = user.beginTransaction();
+    public boolean getApplyPasswordButtonDisabled() {
+        return applyPasswordButtonDisabled.get();
+    }
+
+    public BooleanProperty applyPasswordButtonDisabledProperty() {
+        return applyPasswordButtonDisabled;
+    }
+
+    public void applyUsername() {
         try {
-            transaction.setUsername(username.get());
-            transaction.setPassword(password.get());
-            user.commit(transaction);
+            user.setUsername(username.get());
         } catch (IllegalArgumentException e) {
-            transaction.rollback();
-            // User with this name already exists,
-            // set corresponding status
+            // here set bad status
         }
-        */
+    }
+
+    public void applyPassword() {
+        try {
+            user.setPassword(password.get());
+        } catch (IllegalArgumentException e) {
+            // here set bad status
+        }
     }
 }

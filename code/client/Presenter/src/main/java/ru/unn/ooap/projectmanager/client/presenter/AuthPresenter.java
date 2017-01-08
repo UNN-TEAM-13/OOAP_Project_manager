@@ -53,7 +53,7 @@ public class AuthPresenter {
     }
 
     public void auth() {
-        User user = Users.auth(username.get(), password.get());
+        User user = Users.getInstance().auth(username.get(), password.get());
         view.setUser(user);
         try {
             if (user instanceof IExecutor) {

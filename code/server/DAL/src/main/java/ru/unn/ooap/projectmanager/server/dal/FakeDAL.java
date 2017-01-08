@@ -19,41 +19,66 @@ public class FakeDAL implements IDAL {
     private final List<User> usersList = new ArrayList<>();
     private final List<Project> projectsList = new ArrayList<>();
     private final List<Task> tasksList = new ArrayList<>();
+    //private Users users;
+    //private Projects projects;
+    //private Tasks tasks;
 
     public FakeDAL() {
+        /*
+        Подключаемся к хранилищу.
+        (Здесь же?) конструируем объекты,
+        сохранённые в хранилище.
+         */
         usersList.add(new Manager(1, "TestManager", " "));
 
-        Executor testExecutor = new Executor();
-        testExecutor.setId(2);
-        testExecutor.setUsername("TestExecutor");
-        testExecutor.setPassword(" ");
+        Executor testExecutor = new Executor(2, "TestExecutor", " ");
         usersList.add(testExecutor);
 
-        Administrator testAdministrator = new Administrator();
-        testAdministrator.setId(testExecutor.getID() + 1);
-        testAdministrator.setUsername("TestAdministrator");
-        testAdministrator.setPassword(" ");
+        Administrator testAdministrator
+                = new Administrator(testExecutor.getID() + 1, "TestAdministrator", " ");
         usersList.add(testAdministrator);
 
 
-        Project project = new Project(this);
-        project.setTitle("Test Project");
-        project.setDescription("Project, created just to proof of work");
+        Project project = new Project(1, "Test Project", "Project, created just to proof of work",
+                                      new ArrayList<>(), this);
         projectsList.add(project);
 
-        Task testTask1 = new Task();
-        testTask1.setTitle("Test task 1");
-        testTask1.setExecutor(testExecutor);
-        testTask1.setProject(project);
+        Task testTask1 = new Task(1, "Test task 1", "", project, testExecutor,
+                                  0, 1, true, false, this);
         project.addTask(testTask1);
         tasksList.add(testTask1);
 
-        Task testTask2 = new Task();
-        testTask2.setTitle("Test task 2");
-        testTask2.setExecutor(testExecutor);
-        testTask2.setProject(project);
+        Task testTask2 = new Task(2, "Test task 2", "", project, testExecutor,
+                                  1, 2, true, true, this);
         project.addTask(testTask2);
         tasksList.add(testTask2);
+    }
+
+    @Override
+    public void setUsers(final Users users) {
+        //this.users = users;
+        /*
+        Вставляем в объект класса Users
+        список уже сконструированных объектов юзеров.
+         */
+    }
+
+    @Override
+    public void setProjects(final Projects projects) {
+        //this.projects = projects;
+        /*
+        Вставляем в объект класса Projects
+        список уже сконструированных проектов.
+         */
+    }
+
+    @Override
+    public void setTasks(final Tasks tasks) {
+        //this.tasks = tasks;
+        /*
+        Вставляем в объект класса Users
+        список уже сконструированных задач.
+         */
     }
 
     @Override

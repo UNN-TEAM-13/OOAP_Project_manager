@@ -42,6 +42,11 @@ public class User implements IUser,
     }
 
     public void setUsername(final String username) {
+        for (User user : Users.getInstance().get()) {
+            if (user != this && user.getUsername().equals(username)) {
+                throw new IllegalArgumentException("User with this username already exists");
+            }
+        }
         this.username = username;
     }
 

@@ -13,14 +13,17 @@ public class AdministratorUserView implements IUserView {
     @FXML
     private TextField password;
     @FXML
-    private Button applyButton;
+    private Button applyUsernameButton;
+    @FXML
+    private Button applyPasswordButton;
 
     @FXML
     private UserPresenter presenter;
 
     @FXML
     void initialize() {
-        applyButton.setOnAction((actionEvent) -> presenter.apply());
+        applyUsernameButton.setOnAction((actionEvent) -> presenter.applyUsername());
+        applyPasswordButton.setOnAction((actionEvent) -> presenter.applyPassword());
         username.textProperty().bindBidirectional(presenter.usernameProperty());
         password.textProperty().bindBidirectional(presenter.passwordProperty());
     }

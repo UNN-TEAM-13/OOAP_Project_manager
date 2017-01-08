@@ -11,11 +11,25 @@ public class Project implements IProject {
     private int id;
     private String title;
     private String description;
-    private final List<Task> tasks = new ArrayList<>();
+    private final List<Task> tasks;
     private final IDAL storage;
 
     public Project(final IDAL storage) {
+        this(-1, "", "", new ArrayList<Task>(), storage);
+    }
+
+    // Only for inDAL use
+    public Project(final int id, final String title, final String description,
+                   final List<Task> tasks, final IDAL storage) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.tasks = tasks;
         this.storage = storage;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setTitle(final String title) {

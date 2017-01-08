@@ -31,7 +31,7 @@ public final class Tasks {
     }
 
     public Task create() {
-        Task task = new Task();
+        Task task = new Task(storage);
         tasks.add(task);
         storage.sync(this);
         return task;

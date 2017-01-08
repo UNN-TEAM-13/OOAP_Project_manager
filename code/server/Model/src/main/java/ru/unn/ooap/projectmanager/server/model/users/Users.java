@@ -10,10 +10,12 @@ import java.util.List;
 
 public final class Users {
     private static Users instance;
-    private static IDAL storage;
-    private static List<User> users;
+    private final IDAL storage;
+    private List<User> users = new ArrayList<>();
 
-    private Users() {
+    private Users(final IDAL storage) {
+        this.storage = storage;
+        storage.setUsers(this);
     }
 
     public static void init(final IDAL storage) {
@@ -21,8 +23,7 @@ public final class Users {
             if (instance != null) {
                 throw new AssertionError("Already initialized");
             }
-            instance = new Users();
-            Users.storage = storage;
+            instance = new Users(storage);
             storage.sync(instance);
         }
     }
@@ -31,7 +32,11 @@ public final class Users {
         return instance;
     }
 
-    public static User auth(final String un, final String pw) {
+    IDAL getStorage() {
+        return storage;
+    }
+
+    public User auth(final String un, final String pw) {
         for (User user : users) {
             if (user.getUsername().equals(un) && user.isPasswordValid(pw)) {
                 return user;
@@ -41,7 +46,7 @@ public final class Users {
     }
 
     public void setUsers(final List<User> users) {
-        Users.users = users;
+        this.users = users;
     }
 
     public Administrator createAdministrator() {

@@ -1,5 +1,6 @@
 package ru.unn.ooap.projectmanager.server.model.tasks;
 
+import ru.unn.ooap.projectmanager.server.model.IDAL;
 import ru.unn.ooap.projectmanager.server.model.projects.Project;
 import ru.unn.ooap.projectmanager.server.model.users.executor.Executor;
 
@@ -18,9 +19,29 @@ public class Task implements ru.unn.ooap.projectmanager.server.model.users.execu
     private double spentHours;
     private boolean open;
     private boolean done;
+    private final IDAL storage;
 
-    public Task() {
-        // initialisation
+    public Task(final IDAL storage) {
+        this(-1, "", "", null, null, 0, 0, false, false, storage);
+    }
+
+    // Only for in DAL use
+//CHECKSTYLE:OFF
+    public Task(final int id, final String title, final String description,
+                final Project project, final Executor executor,
+                final double givenHours, final double spentHours,
+                final boolean open, final boolean done, final IDAL storage) {
+//CHECKSTYLE:ON
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.project = project;
+        this.executor = executor;
+        this.givenHours = givenHours;
+        this.spentHours = spentHours;
+        this.open = open;
+        this.done = done;
+        this.storage = storage;
     }
 
     @Override
@@ -41,6 +62,7 @@ public class Task implements ru.unn.ooap.projectmanager.server.model.users.execu
     @Override
     public void setDescription(final String description) {
         this.description = description;
+        storage.sync(this);
     }
 
     @Override
