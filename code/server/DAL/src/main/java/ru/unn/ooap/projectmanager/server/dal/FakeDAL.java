@@ -1,5 +1,6 @@
 package ru.unn.ooap.projectmanager.server.dal;
 
+import org.omg.PortableInterceptor.INACTIVE;
 import ru.unn.ooap.projectmanager.server.model.IDAL;
 
 import ru.unn.ooap.projectmanager.server.model.tasks.Task;
@@ -43,15 +44,105 @@ public class FakeDAL implements IDAL {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        try {
+            ObjectOutputStream adminsIDOOS = new ObjectOutputStream(
+                    new FileOutputStream("admins.db"));
+            ArrayList<Integer> adminsIDs = new ArrayList<>();
+            for (User user : usersList) {
+                if (user instanceof Administrator) {
+                    adminsIDs.add(user.getID());
+                }
+            }
+            adminsIDOOS.writeObject(adminsIDs);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            ObjectOutputStream managersIDOOS = new ObjectOutputStream(
+                    new FileOutputStream("managers.db"));
+            ArrayList<Integer> managersIDs = new ArrayList<>();
+            for (User user : usersList) {
+                if (user instanceof Manager) {
+                    managersIDs.add(user.getID());
+                }
+            }
+            managersIDOOS.writeObject(managersIDs);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            ObjectOutputStream executorsIDOOS = new ObjectOutputStream(
+                    new FileOutputStream("executors.db"));
+            ArrayList<Integer> executorsIDs = new ArrayList<>();
+            for (User user : usersList) {
+                if (user instanceof Executor) {
+                    executorsIDs.add(user.getID());
+                }
+            }
+            executorsIDOOS.writeObject(executorsIDs);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private boolean checkIDinList(List<Integer> l, int id) {
+        for (Integer integer : l) {
+            if (integer.equals(id)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void loadLists() {
+        ArrayList<Integer> adminsIDs = new ArrayList<Integer>();
+        try {
+            ObjectInputStream adminsIS = new ObjectInputStream(new FileInputStream("admins.db"));
+            try {
+                adminsIDs = (ArrayList<Integer>) adminsIS.readObject();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ArrayList<Integer> managersIDs = new ArrayList<Integer>();
+        try {
+            ObjectInputStream managersIS = new ObjectInputStream(new FileInputStream("managers.db"));
+            try {
+                managersIDs = (ArrayList<Integer>) managersIS.readObject();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ArrayList<Integer> executorsIDs = new ArrayList<Integer>();
+        try {
+            ObjectInputStream executorsIS = new ObjectInputStream(new FileInputStream("executors.db"));
+            try {
+                executorsIDs = (ArrayList<Integer>) executorsIS.readObject();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         try {
             ObjectInputStream usersIS = new ObjectInputStream(new FileInputStream("users.db"));
             try {
                 ArrayList<User> tmp = (ArrayList<User>) usersIS.readObject();
                 for (User user : tmp) {
-                    usersList.add(new User(user.getID(), user.getUsername(), user.getPassword(), this));
+                    if (checkIDinList(adminsIDs, user.getID())) {
+                        usersList.add(new Administrator(user.getID(), user.getUsername(),
+                                user.getPassword(), this));
+                    } else if (checkIDinList(managersIDs, user.getID())) {
+                        usersList.add(new Manager(user.getID(), user.getUsername(),
+                                user.getPassword(), this));
+                    } else if (checkIDinList(executorsIDs, user.getID())) {
+                        usersList.add(new Executor(user.getID(), user.getUsername(),
+                                user.getPassword(), this));
+                    }
                 }
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
@@ -87,7 +178,8 @@ public class FakeDAL implements IDAL {
                     }
                     User executor = null;
                     for (User user : usersList) {
-                        if (user.getID() == task.getExecutor().getID()) {
+                        if (task.getExecutor() != null
+                                && user.getID() == task.getExecutor().getID()) {
                             executor = user;
                         }
                         break;
@@ -128,7 +220,8 @@ public class FakeDAL implements IDAL {
             usersList.add(testAdministrator);
 
 
-            Project project = new Project(1, "Test Project", "Project, created just to proof of work",
+            Project project = new Project(1, "Test Project",
+                    "Project, created just to proof of work",
                     new ArrayList<>(), this);
             projectsList.add(project);
 
@@ -177,7 +270,6 @@ public class FakeDAL implements IDAL {
 
     @Override
     public void sync(final Project project) {
-        //
         saveLists();
     }
 
@@ -189,7 +281,6 @@ public class FakeDAL implements IDAL {
 
     @Override
     public void sync(final Task task) {
-        String str = new String("test");
         saveLists();
     }
 
@@ -217,19 +308,16 @@ public class FakeDAL implements IDAL {
 
     @Override
     public void sync(final Administrator admin) {
-        String str = new String("test");
         saveLists();
     }
 
     @Override
     public void sync(final Manager manager) {
-        String str = new String("test");
         saveLists();
     }
 
     @Override
     public void sync(final Executor executor) {
-        String str = new String("test");
         saveLists();
     }
 }
