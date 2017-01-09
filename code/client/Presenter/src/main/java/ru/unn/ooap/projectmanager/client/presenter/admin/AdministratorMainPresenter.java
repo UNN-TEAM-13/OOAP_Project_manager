@@ -78,7 +78,7 @@ public class AdministratorMainPresenter implements IUserMainPresenter, Observer 
     }
 
     public void createExecutor() {
-        IUser newExecutor = user.createManager();
+        IUser newExecutor = user.createExecutor();
         newExecutor.addObserver(this);
         showUserView(newExecutor);
     }
