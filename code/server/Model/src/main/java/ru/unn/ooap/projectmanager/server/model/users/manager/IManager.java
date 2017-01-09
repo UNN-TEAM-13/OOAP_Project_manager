@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface IManager extends IUser {
     List<? extends IProject> getProjects();
+    ITask createTask();
     ITask createTask(IProject project);
     IProject createProject();
 }

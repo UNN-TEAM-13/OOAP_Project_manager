@@ -33,7 +33,11 @@ public class ManagerMainView extends UserMainView implements IManagerMainView {
         createTaskButton.setOnAction(actionEvent -> presenter.createTask());
 
         projects.getSelectionModel().selectedItemProperty().addListener(
-                ((observable, oldValue, newValue) -> presenter.setSelected(newValue.getValue())));
+                ((observable, oldValue, newValue) -> {
+                    if (newValue != null) {
+                        presenter.setSelected(newValue.getValue());
+                    }
+                }));
     }
 
     @Override

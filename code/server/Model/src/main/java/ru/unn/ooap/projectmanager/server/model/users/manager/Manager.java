@@ -17,15 +17,23 @@ public class Manager extends User implements IManager {
         super(id, un, pw, storage);
     }
 
+    @Override
     public IProject createProject() {
         return Projects.getInstance().create();
     }
 
+    @Override
     public List<? extends IProject> getProjects() {
         return Projects.getInstance().get();
     }
 
+    @Override
     public ITask createTask(final IProject project) {
         return Tasks.getInstance().create((Project) project);
+    }
+
+    @Override
+    public ITask createTask() {
+        return Tasks.getInstance().create();
     }
 }

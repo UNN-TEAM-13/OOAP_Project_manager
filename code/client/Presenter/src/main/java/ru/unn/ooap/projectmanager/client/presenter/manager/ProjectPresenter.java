@@ -10,14 +10,20 @@ public class ProjectPresenter {
     private IProjectView view;
     private IProject project;
 
-    private final StringProperty titleText = new SimpleStringProperty("");
-    private final StringProperty descriptionText = new SimpleStringProperty("");
+    private final StringProperty titleText = new SimpleStringProperty();
+    private final StringProperty descriptionText = new SimpleStringProperty();
     private final BooleanProperty applyButtonDisabled = new SimpleBooleanProperty();
     private final ObjectProperty<ObservableList<ITask>> tasks
             = new SimpleObjectProperty<>(FXCollections.observableArrayList());
 
     public ProjectPresenter() {
-        // initialisation
+        titleText.addListener((observable, oldValue, newValue) -> validateInput());
+        titleText.set("");
+        descriptionText.set("");
+    }
+
+    private void validateInput() {
+        applyButtonDisabled.set(titleText.get().equals(""));
     }
 
     public void setView(final IProjectView view) {
@@ -47,8 +53,12 @@ public class ProjectPresenter {
         return descriptionText;
     }
 
-    public boolean isApplyButtonDisabled() {
+    public boolean getApplyButtonDisabled() {
         return applyButtonDisabled.get();
+    }
+
+    public BooleanProperty applyButtonDisabledProperty() {
+        return applyButtonDisabled;
     }
 
     public ObservableList<ITask> getTasks() {

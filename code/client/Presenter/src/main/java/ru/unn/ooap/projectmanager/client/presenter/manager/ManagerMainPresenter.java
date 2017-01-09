@@ -11,12 +11,15 @@ import ru.unn.ooap.projectmanager.server.model.users.manager.IProject;
 import ru.unn.ooap.projectmanager.server.model.users.manager.ITask;
 
 import java.io.IOException;
+import java.util.Observable;
+import java.util.Observer;
 
-public class ManagerMainPresenter implements IUserMainPresenter {
+public class ManagerMainPresenter implements IUserMainPresenter, Observer {
     private IManager user;
     private IManagerMainView view;
     private final ObjectProperty<TreeItem<Object>> root
             = new SimpleObjectProperty<>(new TreeItem<>("Root item"));
+    private Object selected;
 
     @Override
     public void setView(final IUserMainView view) {
@@ -28,13 +31,13 @@ public class ManagerMainPresenter implements IUserMainPresenter {
     }
 
     private void constructTreeRoot() {
+        root.get().getChildren().clear();
         for (IProject project : user.getProjects()) {
             TreeItem<Object> projectTreeItem = new TreeItem<>(project);
             for (ITask task : project.getTasks()) {
                 TreeItem<Object> taskTreeItem = new TreeItem<>(task);
                 projectTreeItem.getChildren().add(taskTreeItem);
             }
-            root.get().getChildren().clear();
             root.get().getChildren().add(projectTreeItem);
         }
     }
@@ -42,6 +45,12 @@ public class ManagerMainPresenter implements IUserMainPresenter {
     public void setUser(final IUser user) {
         this.user = (IManager) user;
         constructTreeRoot();
+        for (IProject project : ((IManager) user).getProjects()) {
+            project.addObserver(this);
+            for (ITask task : project.getTasks()) {
+                task.addObserver(this);
+            }
+        }
     }
 
     IManager getUser() {
@@ -57,6 +66,10 @@ public class ManagerMainPresenter implements IUserMainPresenter {
     }
 
     public void setSelected(final Object object) {
+        if (object == null) {
+            return;
+        }
+        selected = object;
         try {
             if (object instanceof ITask) {
                 view.showTask((ITask) object);
@@ -69,17 +82,25 @@ public class ManagerMainPresenter implements IUserMainPresenter {
     }
 
     public void createTask() {
-        // TBD
-        // Если в данный момент открыт проект
-        // — создаём задачу с этим проектом
-        // Если в данный момент открыта задача
-        // или ничего не открыто
-        // — создаём просто задачу,
-        // не присваиваяя ей какой-либо проект
+        ITask task;
+        if (selected instanceof IProject) {
+            task = user.createTask((IProject) selected);
+        } else {
+            task = user.createTask();
+        }
+        task.addObserver(this);
+        setSelected(task);
     }
 
     public void createProject() {
-        // TBD
-        // То же, что в таске
+        IProject project = user.createProject();
+        project.addObserver(this);
+        setSelected(project);
+    }
+
+    @Override
+    public void update(final Observable o, final Object arg) {
+        // Subscribed only to all Project and Task instances
+        constructTreeRoot();
     }
 }
