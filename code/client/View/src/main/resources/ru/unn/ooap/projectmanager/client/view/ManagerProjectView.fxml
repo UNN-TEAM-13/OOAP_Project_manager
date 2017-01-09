@@ -13,6 +13,7 @@
     <TextField fx:id="title"/>
     <TextField fx:id="description"/>
     <Button fx:id="applyButton" text="Применить" disable="${presenter.applyButtonDisabled}" defaultButton="true"/>
+    <Button fx:id="createTaskButton" text="Добавить задачу"/>
     <!--
         <ListView fx:id="tasks" items="${presenter.tasks}"/>
     -->

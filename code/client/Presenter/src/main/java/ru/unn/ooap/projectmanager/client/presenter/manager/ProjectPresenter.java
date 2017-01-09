@@ -7,6 +7,7 @@ import ru.unn.ooap.projectmanager.server.model.users.manager.IProject;
 import ru.unn.ooap.projectmanager.server.model.users.manager.ITask;
 
 public class ProjectPresenter {
+    private ManagerMainPresenter parentPresenter;
     private IProjectView view;
     private IProject project;
 
@@ -41,6 +42,10 @@ public class ProjectPresenter {
         tasks.set(FXCollections.observableArrayList(project.getTasks()));
     }
 
+    public void setParentPresenter(final ManagerMainPresenter parentPresenter) {
+        this.parentPresenter = parentPresenter;
+    }
+
     public IProject getProject() {
         return project;
     }
@@ -68,5 +73,9 @@ public class ProjectPresenter {
     public void apply() {
         project.setTitle(titleText.get());
         project.setDescription(descriptionText.get());
+    }
+
+    public void createTask() {
+        parentPresenter.createTask();
     }
 }

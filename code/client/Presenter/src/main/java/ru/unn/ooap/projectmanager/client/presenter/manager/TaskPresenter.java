@@ -10,18 +10,30 @@ public class TaskPresenter {
     private ITask task;
 
     private final BooleanProperty applyButtonDisable = new SimpleBooleanProperty();
-    private final StringProperty titleText = new SimpleStringProperty("");
-    private final StringProperty descriptionText = new SimpleStringProperty("");
-    private final StringProperty givenHoursText = new SimpleStringProperty("");
+    private final StringProperty titleText = new SimpleStringProperty();
+    private final StringProperty descriptionText = new SimpleStringProperty();
+    private final StringProperty givenHoursText = new SimpleStringProperty();
+
     private final DoubleProperty spentHoursPercent = new SimpleDoubleProperty();
     private final BooleanProperty hideProgressInfo = new SimpleBooleanProperty(true);
 
     public TaskPresenter() {
-        /*
         titleText.addListener((ov, olv, nev) -> validateInput());
-        descriptionText.addListener((ov, olv, nev) -> validateInput();
-        givenHoursText.addListener((ov, olv, nev) -> validateInput();
-        */
+        descriptionText.addListener((ov, olv, nev) -> validateInput());
+        givenHoursText.addListener((ov, olv, nev) -> validateInput());
+        titleText.set("");
+        descriptionText.set("");
+        givenHoursText.set("");
+
+    }
+
+    private void validateInput() {
+        try {
+            Double.parseDouble(givenHoursText.get());
+            applyButtonDisable.set(titleText.get().equals(""));
+        } catch (Exception e) {
+            applyButtonDisable.set(true);
+        }
     }
 
     public void setView(final ITaskView view) {
@@ -30,14 +42,6 @@ public class TaskPresenter {
 
     public ITaskView getView() {
         return view;
-    }
-
-    public void setManager(final IManager manager) {
-        this.manager = manager;
-    }
-
-    public IManager getManager() {
-        return manager;
     }
 
     public void setTask(final ITask task) {
@@ -85,7 +89,7 @@ public class TaskPresenter {
         return spentHoursPercent.get();
     }
 
-    public boolean isHideProgressInfo() {
+    public boolean getHideProgressInfo() {
         return hideProgressInfo.get();
     }
 
@@ -94,6 +98,9 @@ public class TaskPresenter {
     }
 
     public void apply() {
-        // do apply
+        //task.setExecutor();
+        task.setTitle(titleText.get());
+        task.setDescription(descriptionText.get());
+        task.setGivenHours(Double.parseDouble(givenHoursText.get()));
     }
 }

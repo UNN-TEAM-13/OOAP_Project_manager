@@ -14,7 +14,6 @@
     </fx:define>
     <VBox>
         <Button fx:id="createProjectButton" text="Добавить проект"/>
-        <Button fx:id="createTaskButton" text="Добавить задачу"/>
         <TreeView fx:id="projects" root="${presenter.root}" showRoot="false"/>
     </VBox>
     <Pane fx:id="content"/>

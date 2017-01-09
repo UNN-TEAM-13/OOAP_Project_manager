@@ -20,8 +20,6 @@ public class ManagerMainView extends UserMainView implements IManagerMainView {
     private TreeView<String> projects;
     @FXML
     private Button createProjectButton;
-    @FXML
-    private Button createTaskButton;
 
     @FXML
     private ManagerMainPresenter presenter;
@@ -30,7 +28,6 @@ public class ManagerMainView extends UserMainView implements IManagerMainView {
     void initialize() {
         presenter.setView(this);
         createProjectButton.setOnAction(actionEvent -> presenter.createProject());
-        createTaskButton.setOnAction(actionEvent -> presenter.createTask());
 
         projects.getSelectionModel().selectedItemProperty().addListener(
                 ((observable, oldValue, newValue) -> {
@@ -52,6 +49,7 @@ public class ManagerMainView extends UserMainView implements IManagerMainView {
         content.getChildren().add(loader.load());
         ManagerProjectView controller = loader.<ManagerProjectView>getController();
         controller.initProject(project);
+        controller.setParentPresenter(presenter);
     }
 
     @Override

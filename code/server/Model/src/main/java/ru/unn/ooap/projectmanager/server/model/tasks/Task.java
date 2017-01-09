@@ -94,6 +94,7 @@ public class Task extends Observable
     @Override
     public void setProject(final Project project) {
         this.project = project;
+        project.addTask(this);
         storage.sync(this);
         setChanged();
         notifyObservers();
@@ -111,7 +112,7 @@ public class Task extends Observable
 
     @Override
     public void setGivenHours(final double givenHours) {
-        if (givenHours <= 0) {
+        if (givenHours < 0) {
             throw new IllegalArgumentException();
         }
         this.givenHours = givenHours;

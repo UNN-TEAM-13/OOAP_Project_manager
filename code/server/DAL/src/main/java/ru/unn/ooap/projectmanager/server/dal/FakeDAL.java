@@ -44,12 +44,12 @@ public class FakeDAL implements IDAL {
         projectsList.add(project);
 
         Task testTask1 = new Task(1, "Test task 1", "", project, testExecutor,
-                                  0, 1, true, false, this);
+                                  0, 0, true, false, this);
         project.addTask(testTask1);
         tasksList.add(testTask1);
 
         Task testTask2 = new Task(2, "Test task 2", "", project, testExecutor,
-                                  1, 2, true, true, this);
+                                  2, 1, true, true, this);
         project.addTask(testTask2);
         tasksList.add(testTask2);
     }
