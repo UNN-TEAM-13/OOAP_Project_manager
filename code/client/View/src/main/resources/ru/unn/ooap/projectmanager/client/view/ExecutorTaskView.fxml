@@ -3,9 +3,11 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Button?>
+
 <?import ru.unn.ooap.projectmanager.client.presenter.executor.TaskPresenter?>
 
-<?import javafx.scene.control.ProgressBar?>
 <GridPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.unn.ooap.projectmanager.client.view.ExecutorTaskView">
     <fx:define>
         <TaskPresenter fx:id="presenter" />
@@ -20,5 +22,6 @@
     <ProgressBar fx:id="spentHoursProgressBar" progress="${presenter.spentHoursPercent}" GridPane.rowIndex="4" GridPane.columnIndex="2"/>
     <Label text="${presenter.spentHoursText}"  GridPane.rowIndex="4" GridPane.columnIndex="3" />
     <Label text="Отчитаться о потраченном времени: " GridPane.rowIndex="5" GridPane.columnIndex="1"/>
-    <TextField fx:id="reportSpentTime" GridPane.rowIndex="5" GridPane.columnIndex="2"/>
+    <TextField fx:id="reportSpentTimeText" GridPane.rowIndex="5" GridPane.columnIndex="2"/>
+    <Button fx:id="reportSpentTimeButton" text="Отчитаться" disable="${presenter.reportSpentTimeButtonDisabled}" GridPane.rowIndex="5" GridPane.columnIndex="3"/>
 </GridPane>

@@ -1,20 +1,35 @@
 package ru.unn.ooap.projectmanager.client.presenter.executor;
 
 import javafx.beans.property.*;
-import ru.unn.ooap.projectmanager.server.model.users.executor.IExecutor;
 import ru.unn.ooap.projectmanager.server.model.users.executor.ITask;
 
 public class TaskPresenter {
     private ITaskView view;
-    private IExecutor executor;
     private ITask task;
 
-    private final StringProperty spentTimeReport = new SimpleStringProperty("");
+    private final StringProperty spentTimeReport = new SimpleStringProperty();
+
     private final StringProperty title = new SimpleStringProperty("");
     private final StringProperty description = new SimpleStringProperty("");
     private final StringProperty givenHoursText = new SimpleStringProperty("");
     private final StringProperty spentHoursText = new SimpleStringProperty("");
     private final DoubleProperty spentHoursPercent = new SimpleDoubleProperty();
+    private final BooleanProperty reportSpentTimeButtonDisabled
+            = new SimpleBooleanProperty();
+
+    public TaskPresenter() {
+        spentTimeReport.addListener(((observable, oldValue, newValue) -> validateInput()));
+        spentTimeReport.set("");
+    }
+
+    private void validateInput() {
+        try {
+            Double.parseDouble(spentTimeReport.get());
+            reportSpentTimeButtonDisabled.set(false);
+        } catch (Exception e) {
+            reportSpentTimeButtonDisabled.set(true);
+        }
+    }
 
     public void setView(final ITaskView view) {
         this.view = view;
@@ -22,14 +37,6 @@ public class TaskPresenter {
 
     public ITaskView getView() {
         return view;
-    }
-
-    public void setExecutor(final IExecutor executor) {
-        this.executor = executor;
-    }
-
-    public IExecutor getExecutor() {
-        return executor;
     }
 
     public void setTask(final ITask task) {
@@ -87,5 +94,17 @@ public class TaskPresenter {
 
     public Double getSpentHoursPercent() {
         return spentHoursPercent.get();
+    }
+
+    public BooleanProperty reportSpentTimeButtonDisabledProperty() {
+        return reportSpentTimeButtonDisabled;
+    }
+
+    public boolean getReportSpentTimeButtonDisabled() {
+        return reportSpentTimeButtonDisabled.get();
+    }
+
+    public void reportSpentTime() {
+        task.addSpentHours(Double.parseDouble(spentTimeReport.get()));
     }
 }
