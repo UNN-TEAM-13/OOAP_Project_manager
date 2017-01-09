@@ -6,11 +6,12 @@ import ru.unn.ooap.projectmanager.server.model.users.executor.Executor;
 import ru.unn.ooap.projectmanager.server.model.users.executor.IExecutor;
 import ru.unn.ooap.projectmanager.server.model.users.manager.IProject;
 
+import java.io.Serializable;
 import java.util.Observable;
 
 public class Task extends Observable
         implements ru.unn.ooap.projectmanager.server.model.users.executor.ITask,
-                   ru.unn.ooap.projectmanager.server.model.users.manager.ITask {
+                   ru.unn.ooap.projectmanager.server.model.users.manager.ITask, Serializable {
 
     /*
      As we work with objects directly, we don't need IDs for Task, Project and User,
@@ -24,7 +25,7 @@ public class Task extends Observable
     private double spentHours;
     private boolean open;
     private boolean done;
-    private final IDAL storage;
+    transient private IDAL storage;
 
     public Task(final IDAL storage) {
         this(-1, "", "", null, null, 0, 0, false, false, storage);

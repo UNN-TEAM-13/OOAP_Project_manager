@@ -12,6 +12,7 @@ import ru.unn.ooap.projectmanager.server.model.users.administrator.Administrator
 import ru.unn.ooap.projectmanager.server.model.users.executor.Executor;
 import ru.unn.ooap.projectmanager.server.model.users.manager.Manager;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,38 +24,125 @@ public class FakeDAL implements IDAL {
     //private Projects projects;
     //private Tasks tasks;
 
+    private void saveLists() {
+        try {
+            ObjectOutputStream usersOOS = new ObjectOutputStream(new FileOutputStream("users.db"));
+            usersOOS.writeObject(usersList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            ObjectOutputStream projectsOOS = new ObjectOutputStream(new FileOutputStream("projects.db"));
+            projectsOOS.writeObject(projectsList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            ObjectOutputStream tasksOOS = new ObjectOutputStream(new FileOutputStream("tasks.db"));
+            tasksOOS.writeObject(tasksList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadLists() {
+        try {
+            ObjectInputStream usersIS = new ObjectInputStream(new FileInputStream("users.db"));
+            try {
+                ArrayList<User> tmp = (ArrayList<User>) usersIS.readObject();
+                for (User user : tmp) {
+                    usersList.add(new User(user.getID(), user.getUsername(), user.getPassword(), this));
+                }
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            ObjectInputStream projectsIS = new ObjectInputStream(new FileInputStream("projects.db"));
+            try {
+                ArrayList<Project> tmp = (ArrayList<Project>) projectsIS.readObject();
+                for (Project project : tmp) {
+                    projectsList.add(new Project(project.getId(),
+                            project.getTitle(), project.getDescription(), new ArrayList<Task>(), this));
+                }
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            ObjectInputStream tasksIS = new ObjectInputStream(new FileInputStream("tasks.db"));
+            try {
+                ArrayList<Task> tmp = (ArrayList<Task>) tasksIS.readObject();
+                for (Task task : tmp) {
+                    Project prj = null;
+                    for (Project project : projectsList) {
+                        if (project.getId() == task.getProject().getId()) {
+                            prj = project;
+                            break;
+                        }
+                    }
+                    User executor = null;
+                    for (User user : usersList) {
+                        if (user.getID() == task.getExecutor().getID()) {
+                            executor = user;
+                        }
+                        break;
+                    }
+                    tasksList.add(new Task(task.getID(), task.getTitle(), task.getDescription(), prj, (Executor)executor,
+                            task.getGivenHours(), task.getSpentHours(),
+                            task.isOpen(),task.isDone(),this));
+                }
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public FakeDAL() {
         /*
         Подключаемся к хранилищу.
         (Здесь же?) конструируем объекты,
         сохранённые в хранилище.
          */
-        usersList.add(new Manager(1, "TestManager", " ", this));
+        if (new File("users.db").exists()
+                && new File("projects.db").exists()
+                && new File("tasks.db").exists()) {
+            loadLists();
+        } else {
+            usersList.add(new Manager(1, "TestManager", " ", this));
 
-        Executor testExecutor1 = new Executor(2, "TestExecutor 1", " ", this);
-        usersList.add(testExecutor1);
-        Executor testExecutor2 = new Executor(testExecutor1.getID() + 1, "TestExecutor 2",
-                                              " ", this);
-        usersList.add(testExecutor2);
+            Executor testExecutor1 = new Executor(2, "TestExecutor 1", " ", this);
+            usersList.add(testExecutor1);
+            Executor testExecutor2 = new Executor(testExecutor1.getID() + 1, "TestExecutor 2",
+                    " ", this);
+            usersList.add(testExecutor2);
 
-        Administrator testAdministrator
-                = new Administrator(testExecutor2.getID() + 1, "TestAdministrator", " ", this);
-        usersList.add(testAdministrator);
+            Administrator testAdministrator
+                    = new Administrator(testExecutor2.getID() + 1, "TestAdministrator", " ", this);
+            usersList.add(testAdministrator);
 
 
-        Project project = new Project(1, "Test Project", "Project, created just to proof of work",
-                                      new ArrayList<>(), this);
-        projectsList.add(project);
+            Project project = new Project(1, "Test Project", "Project, created just to proof of work",
+                    new ArrayList<>(), this);
+            projectsList.add(project);
 
-        Task testTask1 = new Task(1, "Test task 1", "", project, testExecutor1,
-                                  0, 0, true, false, this);
-        project.addTask(testTask1);
-        tasksList.add(testTask1);
+            Task testTask1 = new Task(1, "Test task 1", "", project, testExecutor1,
+                    0, 0, true, false, this);
+            project.addTask(testTask1);
+            tasksList.add(testTask1);
 
-        Task testTask2 = new Task(2, "Test task 2", "", project, testExecutor1,
-                                  2, 1, true, true, this);
-        project.addTask(testTask2);
-        tasksList.add(testTask2);
+            Task testTask2 = new Task(2, "Test task 2", "", project, testExecutor1,
+                    2, 1, true, true, this);
+            project.addTask(testTask2);
+            tasksList.add(testTask2);
+            saveLists();
+        }
     }
 
     @Override
@@ -64,6 +152,7 @@ public class FakeDAL implements IDAL {
         Вставляем в объект класса Users
         список уже сконструированных объектов юзеров.
          */
+        saveLists();
     }
 
     @Override
@@ -73,6 +162,7 @@ public class FakeDAL implements IDAL {
         Вставляем в объект класса Projects
         список уже сконструированных проектов.
          */
+        saveLists();
     }
 
     @Override
@@ -82,54 +172,64 @@ public class FakeDAL implements IDAL {
         Вставляем в объект класса Users
         список уже сконструированных задач.
          */
+        saveLists();
     }
 
     @Override
     public void sync(final Project project) {
         //
+        saveLists();
     }
 
     @Override
     public void sync(final Projects projects) {
         projects.setProjects(projectsList);
+        saveLists();
     }
 
     @Override
     public void sync(final Task task) {
         String str = new String("test");
+        saveLists();
     }
 
     @Override
     public void sync(final Tasks tasks) {
         tasks.setTasks(tasksList);
+        saveLists();
     }
 
     @Override
     public void sync(final User user) {
         //if (user.getID() == -1) {
-            // here we save new user and set it's ID
+        // here we save new user and set it's ID
         //} else {
-            // here we update information about existing user
+        // here we update information about existing user
         //}
+        saveLists();
     }
 
     @Override
     public void sync(final Users users) {
         users.setUsers(usersList);
+        saveLists();
     }
 
     @Override
     public void sync(final Administrator admin) {
         String str = new String("test");
+        saveLists();
     }
 
     @Override
     public void sync(final Manager manager) {
         String str = new String("test");
+        saveLists();
     }
 
     @Override
     public void sync(final Executor executor) {
         String str = new String("test");
+        saveLists();
     }
 }

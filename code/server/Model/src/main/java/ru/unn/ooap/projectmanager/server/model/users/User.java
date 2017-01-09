@@ -2,14 +2,15 @@ package ru.unn.ooap.projectmanager.server.model.users;
 
 import ru.unn.ooap.projectmanager.server.model.IDAL;
 
+import java.io.Serializable;
 import java.util.Observable;
 
 public class User extends Observable implements IUser,
-        ru.unn.ooap.projectmanager.server.model.users.administrator.IUser {
+        ru.unn.ooap.projectmanager.server.model.users.administrator.IUser, Serializable {
     private int id;
     private String username;
     private String password;
-    private final IDAL storage;
+    transient private IDAL storage;
 
     public User(final IDAL storage) {
         this(-1, "", "", storage);
@@ -34,7 +35,7 @@ public class User extends Observable implements IUser,
         return password.equals(pw);
     }
 
-    boolean changePassword(final String oldPW, final String newPW) {
+    public boolean changePassword(final String oldPW, final String newPW) {
         if (oldPW.equals(password)) {
             password = newPW;
             storage.sync(this);
@@ -72,5 +73,9 @@ public class User extends Observable implements IUser,
     @Override
     public String toString() {
         return username;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

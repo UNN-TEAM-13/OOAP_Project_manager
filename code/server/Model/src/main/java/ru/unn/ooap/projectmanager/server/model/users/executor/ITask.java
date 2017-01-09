@@ -1,6 +1,8 @@
 package ru.unn.ooap.projectmanager.server.model.users.executor;
 
-public interface ITask extends ru.unn.ooap.projectmanager.server.model.tasks.ITask {
+import java.io.Serializable;
+
+public interface ITask extends ru.unn.ooap.projectmanager.server.model.tasks.ITask, Serializable {
     String getTitle();
     String getDescription();
     double getGivenHours();

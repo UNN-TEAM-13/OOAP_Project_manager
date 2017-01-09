@@ -4,16 +4,17 @@ import ru.unn.ooap.projectmanager.server.model.IDAL;
 import ru.unn.ooap.projectmanager.server.model.tasks.Task;
 import ru.unn.ooap.projectmanager.server.model.users.manager.IProject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-public class Project extends Observable implements IProject {
+public class Project extends Observable implements IProject, Serializable {
     private int id;
     private String title;
     private String description;
-    private final List<Task> tasks;
-    private final IDAL storage;
+    transient private final List<Task> tasks;
+    transient private IDAL storage;
 
     public Project(final IDAL storage) {
         this(-1, "", "", new ArrayList<Task>(), storage);
