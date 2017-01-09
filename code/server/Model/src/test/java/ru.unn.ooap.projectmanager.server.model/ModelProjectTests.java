@@ -15,19 +15,19 @@ public class ModelProjectTests {
         assertEquals(null, testProject.getTasks());
     }
 
-    @Test
-    public void testSetTitleOfProject() {
-        Project testProject = new Project(1, "", "", null, null);
-        testProject.setTitle("TestTitle");
-        assertEquals("TestTitle", testProject.getTitle());
-    }
-
-    @Test
-    public void testSetDescriptionOfProject() {
-        Project testProject = new Project(1, "", "", null, null);
-        testProject.setDescription("TestDescription");
-        assertEquals("TestDescription", testProject.getDescription());
-    }
+//    @Test
+//    public void testSetTitleOfProject() {
+//        Project testProject = new Project(1, "", "", null, null);
+//        testProject.setTitle("TestTitle");
+//        assertEquals("TestTitle", testProject.getTitle());
+//    }
+//
+//    @Test
+//    public void testSetDescriptionOfProject() {
+//        Project testProject = new Project(1, "", "", null, null);
+//        testProject.setDescription("TestDescription");
+//        assertEquals("TestDescription", testProject.getDescription());
+//    }
 
     @Test
     public void testToStringProjectTitle() {

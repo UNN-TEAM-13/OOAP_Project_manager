@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 public class ModelUsersManagerTests {
     @Test
     public void testCreateEmptyManager() {
-        Manager testManager = new Manager(1, "", "");
+        Manager testManager = new Manager(1, "", "", null);
         assertEquals(1, testManager.getID());
         assertEquals("", testManager.getUsername());
     }
