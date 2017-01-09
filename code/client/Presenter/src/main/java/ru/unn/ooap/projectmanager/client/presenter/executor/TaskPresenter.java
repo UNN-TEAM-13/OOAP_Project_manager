@@ -73,11 +73,11 @@ public class TaskPresenter {
     }
 
     public StringProperty givenHoursTextProperty() {
-        return description;
+        return givenHoursText;
     }
 
     public String getGivenHoursText() {
-        return description.get();
+        return givenHoursText.get();
     }
 
     public StringProperty spentHoursTextProperty() {
