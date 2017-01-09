@@ -51,5 +51,6 @@ public class AdministratorMainView extends UserMainView implements IAdministrato
         content.getChildren().add(loader.load());
         AdministratorUserView controller = loader.<AdministratorUserView>getController();
         controller.initUser(user);
+        content.getScene().getWindow().sizeToScene();
     }
 }

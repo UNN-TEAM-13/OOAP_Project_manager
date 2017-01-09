@@ -50,6 +50,7 @@ public class ManagerMainView extends UserMainView implements IManagerMainView {
         ManagerProjectView controller = loader.<ManagerProjectView>getController();
         controller.initProject(project);
         controller.setParentPresenter(presenter);
+        content.getScene().getWindow().sizeToScene();
     }
 
     @Override
@@ -60,5 +61,6 @@ public class ManagerMainView extends UserMainView implements IManagerMainView {
         ManagerTaskView controller = loader.<ManagerTaskView>getController();
         controller.initTask(task);
         controller.setParentPresenter(presenter);
+        content.getScene().getWindow().sizeToScene();
     }
 }

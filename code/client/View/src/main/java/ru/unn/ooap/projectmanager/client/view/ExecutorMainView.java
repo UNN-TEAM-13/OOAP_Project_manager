@@ -39,5 +39,6 @@ public class ExecutorMainView extends UserMainView implements IExecutorMainView 
         content.getChildren().add(loader.load());
         ExecutorTaskView controller = loader.<ExecutorTaskView>getController();
         controller.initTask(task);
+        content.getScene().getWindow().sizeToScene();
     }
 }
