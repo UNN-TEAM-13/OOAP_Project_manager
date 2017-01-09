@@ -5,6 +5,8 @@ import ru.unn.ooap.projectmanager.server.model.projects.Project;
 import ru.unn.ooap.projectmanager.server.model.projects.Projects;
 import ru.unn.ooap.projectmanager.server.model.tasks.Tasks;
 import ru.unn.ooap.projectmanager.server.model.users.User;
+import ru.unn.ooap.projectmanager.server.model.users.Users;
+import ru.unn.ooap.projectmanager.server.model.users.executor.IExecutor;
 
 import java.util.List;
 
@@ -35,5 +37,10 @@ public class Manager extends User implements IManager {
     @Override
     public ITask createTask() {
         return Tasks.getInstance().create();
+    }
+
+    @Override
+    public List<? extends IExecutor> getExecutors() {
+        return Users.getInstance().getExecutors();
     }
 }

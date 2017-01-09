@@ -59,5 +59,6 @@ public class ManagerMainView extends UserMainView implements IManagerMainView {
         content.getChildren().add(loader.load());
         ManagerTaskView controller = loader.<ManagerTaskView>getController();
         controller.initTask(task);
+        controller.setParentPresenter(presenter);
     }
 }

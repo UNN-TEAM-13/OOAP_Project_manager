@@ -31,11 +31,14 @@ public class FakeDAL implements IDAL {
          */
         usersList.add(new Manager(1, "TestManager", " ", this));
 
-        Executor testExecutor = new Executor(2, "TestExecutor", " ", this);
-        usersList.add(testExecutor);
+        Executor testExecutor1 = new Executor(2, "TestExecutor 1", " ", this);
+        usersList.add(testExecutor1);
+        Executor testExecutor2 = new Executor(testExecutor1.getID() + 1, "TestExecutor 2",
+                                              " ", this);
+        usersList.add(testExecutor2);
 
         Administrator testAdministrator
-                = new Administrator(testExecutor.getID() + 1, "TestAdministrator", " ", this);
+                = new Administrator(testExecutor2.getID() + 1, "TestAdministrator", " ", this);
         usersList.add(testAdministrator);
 
 
@@ -43,12 +46,12 @@ public class FakeDAL implements IDAL {
                                       new ArrayList<>(), this);
         projectsList.add(project);
 
-        Task testTask1 = new Task(1, "Test task 1", "", project, testExecutor,
+        Task testTask1 = new Task(1, "Test task 1", "", project, testExecutor1,
                                   0, 0, true, false, this);
         project.addTask(testTask1);
         tasksList.add(testTask1);
 
-        Task testTask2 = new Task(2, "Test task 2", "", project, testExecutor,
+        Task testTask2 = new Task(2, "Test task 2", "", project, testExecutor1,
                                   2, 1, true, true, this);
         project.addTask(testTask2);
         tasksList.add(testTask2);

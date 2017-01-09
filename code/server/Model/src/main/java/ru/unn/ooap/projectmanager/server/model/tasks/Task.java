@@ -3,6 +3,8 @@ package ru.unn.ooap.projectmanager.server.model.tasks;
 import ru.unn.ooap.projectmanager.server.model.IDAL;
 import ru.unn.ooap.projectmanager.server.model.projects.Project;
 import ru.unn.ooap.projectmanager.server.model.users.executor.Executor;
+import ru.unn.ooap.projectmanager.server.model.users.executor.IExecutor;
+import ru.unn.ooap.projectmanager.server.model.users.manager.IProject;
 
 import java.util.Observable;
 
@@ -79,8 +81,8 @@ public class Task extends Observable
     }
 
     @Override
-    public void setExecutor(final Executor executor) {
-        this.executor = executor;
+    public void setExecutor(final IExecutor executor) {
+        this.executor = (Executor) executor;
         storage.sync(this);
         setChanged();
         notifyObservers();
@@ -92,8 +94,8 @@ public class Task extends Observable
     }
 
     @Override
-    public void setProject(final Project project) {
-        this.project = project;
+    public void setProject(final IProject project) {
+        this.project = (Project) project;
         project.addTask(this);
         storage.sync(this);
         setChanged();
