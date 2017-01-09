@@ -50,15 +50,21 @@ public final class Users {
     }
 
     public Administrator createAdministrator() {
-        return null;
+        Administrator administrator = new Administrator(storage);
+        users.add(administrator);
+        return administrator;
     }
 
     public Manager createManager() {
-        return null;
+        Manager manager = new Manager(storage);
+        users.add(manager);
+        return manager;
     }
 
     public Executor createExecutor() {
-        return null;
+        Executor executor = new Executor(storage);
+        users.add(executor);
+        return executor;
     }
 
     public List<User> get() {

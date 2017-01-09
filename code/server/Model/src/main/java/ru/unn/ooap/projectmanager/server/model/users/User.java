@@ -1,19 +1,25 @@
 package ru.unn.ooap.projectmanager.server.model.users;
 
-public class User implements IUser,
+import ru.unn.ooap.projectmanager.server.model.IDAL;
+
+import java.util.Observable;
+
+public class User extends Observable implements IUser,
         ru.unn.ooap.projectmanager.server.model.users.administrator.IUser {
     private int id;
     private String username;
     private String password;
+    private final IDAL storage;
 
-    public User() {
-        // initialization
+    public User(final IDAL storage) {
+        this(-1, "", "", storage);
     }
 
-    public User(final int id, final String username, final String password) {
+    public User(final int id, final String username, final String password, final IDAL storage) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.storage = storage;
     }
 
     public int getID() {
@@ -31,6 +37,9 @@ public class User implements IUser,
     boolean changePassword(final String oldPW, final String newPW) {
         if (oldPW.equals(password)) {
             password = newPW;
+            storage.sync(this);
+            setChanged();
+            notifyObservers();
             return true;
         } else {
             return false;
@@ -48,10 +57,16 @@ public class User implements IUser,
             }
         }
         this.username = username;
+        storage.sync(this);
+        setChanged();
+        notifyObservers();
     }
 
     public void setPassword(final String password) {
         this.password = password;
+        storage.sync(this);
+        setChanged();
+        notifyObservers();
     }
 
     @Override

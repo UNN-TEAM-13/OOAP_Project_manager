@@ -8,14 +8,16 @@ import ru.unn.ooap.projectmanager.server.model.users.administrator.IUser;
 
 public class UserPresenter {
     private IUser user;
-    private final StringProperty username = new SimpleStringProperty("");
-    private final StringProperty password = new SimpleStringProperty("");
+    private final StringProperty username = new SimpleStringProperty();
+    private final StringProperty password = new SimpleStringProperty();
     private final BooleanProperty applyUsernameButtonDisabled = new SimpleBooleanProperty();
     private final BooleanProperty applyPasswordButtonDisabled = new SimpleBooleanProperty();
 
     public UserPresenter() {
         username.addListener((observable, oldValue, newValue) -> validateUsername());
         password.addListener((observable, oldValue, newValue) -> validatePassword());
+        username.set("");
+        password.set("");
     }
 
     private void validateUsername() {
@@ -27,6 +29,7 @@ public class UserPresenter {
     }
 
     public void setUser(final IUser user) {
+        System.out.println("UserPresenter.setUser: IUser user == " + user);
         this.user = user;
         username.set(user.getUsername());
     }

@@ -4,8 +4,11 @@ import ru.unn.ooap.projectmanager.server.model.IDAL;
 import ru.unn.ooap.projectmanager.server.model.projects.Project;
 import ru.unn.ooap.projectmanager.server.model.users.executor.Executor;
 
-public class Task implements ru.unn.ooap.projectmanager.server.model.users.executor.ITask,
-        ru.unn.ooap.projectmanager.server.model.users.manager.ITask {
+import java.util.Observable;
+
+public class Task extends Observable
+        implements ru.unn.ooap.projectmanager.server.model.users.executor.ITask,
+                   ru.unn.ooap.projectmanager.server.model.users.manager.ITask {
 
     /*
      As we work with objects directly, we don't need IDs for Task, Project and User,
@@ -52,6 +55,9 @@ public class Task implements ru.unn.ooap.projectmanager.server.model.users.execu
     @Override
     public void setTitle(final String title) {
         this.title = title;
+        storage.sync(this);
+        setChanged();
+        notifyObservers();
     }
 
     @Override
@@ -63,6 +69,8 @@ public class Task implements ru.unn.ooap.projectmanager.server.model.users.execu
     public void setDescription(final String description) {
         this.description = description;
         storage.sync(this);
+        setChanged();
+        notifyObservers();
     }
 
     @Override
@@ -73,6 +81,9 @@ public class Task implements ru.unn.ooap.projectmanager.server.model.users.execu
     @Override
     public void setExecutor(final Executor executor) {
         this.executor = executor;
+        storage.sync(this);
+        setChanged();
+        notifyObservers();
     }
 
     @Override
@@ -83,6 +94,9 @@ public class Task implements ru.unn.ooap.projectmanager.server.model.users.execu
     @Override
     public void setProject(final Project project) {
         this.project = project;
+        storage.sync(this);
+        setChanged();
+        notifyObservers();
     }
 
     @Override
@@ -101,6 +115,9 @@ public class Task implements ru.unn.ooap.projectmanager.server.model.users.execu
             throw new IllegalArgumentException();
         }
         this.givenHours = givenHours;
+        storage.sync(this);
+        setChanged();
+        notifyObservers();
     }
 
     @Override
@@ -109,6 +126,9 @@ public class Task implements ru.unn.ooap.projectmanager.server.model.users.execu
             throw new IllegalArgumentException();
         }
         spentHours += additionalSpentHours;
+        storage.sync(this);
+        setChanged();
+        notifyObservers();
     }
 
     @Override
@@ -129,6 +149,9 @@ public class Task implements ru.unn.ooap.projectmanager.server.model.users.execu
     @Override
     public void setDone(final boolean done) {
         this.done = done;
+        storage.sync(this);
+        setChanged();
+        notifyObservers();
     }
 
     @Override
@@ -139,11 +162,17 @@ public class Task implements ru.unn.ooap.projectmanager.server.model.users.execu
     @Override
     public void open() {
         open = true;
+        storage.sync(this);
+        setChanged();
+        notifyObservers();
     }
 
     @Override
     public void close() {
         open = false;
+        storage.sync(this);
+        setChanged();
+        notifyObservers();
     }
 
     @Override

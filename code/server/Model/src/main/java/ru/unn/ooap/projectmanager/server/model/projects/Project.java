@@ -6,8 +6,9 @@ import ru.unn.ooap.projectmanager.server.model.users.manager.IProject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
-public class Project implements IProject {
+public class Project extends Observable implements IProject {
     private int id;
     private String title;
     private String description;
@@ -34,6 +35,9 @@ public class Project implements IProject {
 
     public void setTitle(final String title) {
         this.title = title;
+        storage.sync(this);
+        setChanged();
+        notifyObservers();
     }
 
     public String getTitle() {
@@ -42,6 +46,9 @@ public class Project implements IProject {
 
     public void setDescription(final String description) {
         this.description = description;
+        storage.sync(this);
+        setChanged();
+        notifyObservers();
     }
 
     public String getDescription() {
@@ -56,6 +63,8 @@ public class Project implements IProject {
     public void addTask(final Task task) {
         tasks.add(task);
         storage.sync(this);
+        setChanged();
+        notifyObservers();
     }
 
     @Override

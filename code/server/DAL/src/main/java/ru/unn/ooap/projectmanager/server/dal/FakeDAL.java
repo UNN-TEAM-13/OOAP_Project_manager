@@ -29,13 +29,13 @@ public class FakeDAL implements IDAL {
         (Здесь же?) конструируем объекты,
         сохранённые в хранилище.
          */
-        usersList.add(new Manager(1, "TestManager", " "));
+        usersList.add(new Manager(1, "TestManager", " ", this));
 
-        Executor testExecutor = new Executor(2, "TestExecutor", " ");
+        Executor testExecutor = new Executor(2, "TestExecutor", " ", this);
         usersList.add(testExecutor);
 
         Administrator testAdministrator
-                = new Administrator(testExecutor.getID() + 1, "TestAdministrator", " ");
+                = new Administrator(testExecutor.getID() + 1, "TestAdministrator", " ", this);
         usersList.add(testAdministrator);
 
 
@@ -103,7 +103,11 @@ public class FakeDAL implements IDAL {
 
     @Override
     public void sync(final User user) {
-        String str = new String("test");
+        //if (user.getID() == -1) {
+            // here we save new user and set it's ID
+        //} else {
+            // here we update information about existing user
+        //}
     }
 
     @Override

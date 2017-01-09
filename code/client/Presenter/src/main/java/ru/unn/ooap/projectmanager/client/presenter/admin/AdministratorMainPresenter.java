@@ -10,8 +10,10 @@ import ru.unn.ooap.projectmanager.server.model.users.administrator.IAdministrato
 import ru.unn.ooap.projectmanager.server.model.users.administrator.IUser;
 
 import java.io.IOException;
+import java.util.Observable;
+import java.util.Observer;
 
-public class AdministratorMainPresenter implements IUserMainPresenter {
+public class AdministratorMainPresenter implements IUserMainPresenter, Observer {
     private IAdministrator user;
     private IAdministratorMainView view;
     private final ObjectProperty<ObservableList<IUser>> users
@@ -28,8 +30,14 @@ public class AdministratorMainPresenter implements IUserMainPresenter {
 
     public void setUser(final ru.unn.ooap.projectmanager.server.model.users.IUser user) {
         this.user = (IAdministrator) user;
+        for (IUser suser : users.get()) {
+            suser.deleteObserver(this);
+        }
         users.get().clear();
         users.set(FXCollections.observableArrayList(this.user.getUsers()));
+        for (IUser suser : users.get()) {
+            suser.addObserver(this);
+        }
     }
 
     public ObservableList<IUser> getUsers() {
@@ -51,21 +59,33 @@ public class AdministratorMainPresenter implements IUserMainPresenter {
     }
 
     public void setSelectedUser(final IUser user) {
+        if (user == null) {
+            return;
+        }
         showUserView(user);
     }
 
     public void createAdministrator() {
         IUser newAdministrator = user.createAdministrator();
-        showUserView(user);
+        newAdministrator.addObserver(this);
+        showUserView(newAdministrator);
     }
 
     public void createManager() {
         IUser newManager = user.createManager();
-        showUserView(user);
+        newManager.addObserver(this);
+        showUserView(newManager);
     }
 
     public void createExecutor() {
         IUser newExecutor = user.createManager();
-        showUserView(user);
+        newExecutor.addObserver(this);
+        showUserView(newExecutor);
+    }
+
+    @Override
+    public void update(final Observable o, final Object arg) {
+        users.get().clear();
+        users.get().setAll(user.getUsers());
     }
 }

@@ -1,6 +1,8 @@
 package ru.unn.ooap.projectmanager.server.model.users;
 
-public interface IUser {
+import ru.unn.ooap.projectmanager.server.model.IObservable;
+
+public interface IUser extends IObservable {
     int getID();
     String getUsername();
     boolean isPasswordValid(String password);
