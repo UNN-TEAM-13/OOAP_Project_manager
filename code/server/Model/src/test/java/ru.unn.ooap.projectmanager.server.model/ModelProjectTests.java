@@ -2,7 +2,6 @@ package ru.unn.ooap.projectmanager.server.model;
 
 import org.junit.Test;
 import ru.unn.ooap.projectmanager.server.model.projects.Project;
-import ru.unn.ooap.projectmanager.server.model.tasks.Task;
 
 import static org.junit.Assert.assertEquals;
 
@@ -36,13 +35,13 @@ public class ModelProjectTests {
         assertEquals("", testProject.toString());
     }
 
-    @Test
-    public void testAddOneTaskToProject() {
-        Project testProject = new Project(1, null, null, null, null);
-        Task testTask = new Task(1,"","",null,null,0,0,true,false,null);
-        testProject.addTask(testTask);
-        assertEquals(1, testProject.getTasks().size());
-    }
+//    @Test
+//    public void testAddOneTaskToProject() {
+//        Project testProject = new Project(1, null, null, null, null);
+//        Task testTask = new Task(1, "", "", null, null, 0, 0, true, false, null);
+//        testProject.addTask(testTask);
+//        assertEquals(1, testProject.getTasks().size());
+//    }
 
 
 }

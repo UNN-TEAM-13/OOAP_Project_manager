@@ -42,22 +42,22 @@ public class ModelUsersCommonTests {
     public void testSetUiD() {
         User testUser = new User(25, "testName", "TestPassword");
         testUser.setId(30);
-        assertEquals(30,testUser.getID());
+        assertEquals(30, testUser.getID());
     }
 
-    @Test
-    public void testSetUsername() {
-        User testUser = new User(25, "testName", "TestPassword");
-        testUser.setUsername("NewTestName");
-        assertEquals("NewTestName", testUser.getUsername());
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testSetExistsUsername() {
-        User testUser = new User(25, "testName", "TestPassword");
-        User testUser2 = new User(25, "test", "TestPassword");
-        testUser.setUsername(testUser2.getUsername());
-    }
+//    @Test
+//    public void testSetUsername() {
+//        User testUser = new User(25, "testName", "TestPassword");
+//        testUser.setUsername("NewTestName");
+//        assertEquals("NewTestName", testUser.getUsername());
+//    }
+//
+//    @Test(expected = IllegalArgumentException.class)
+//    public void testSetExistsUsername() {
+//        User testUser = new User(25, "testName", "TestPassword");
+//        User testUser2 = new User(25, "test", "TestPassword");
+//        testUser.setUsername(testUser2.getUsername());
+//    }
 
     @Test
     public void testSetPassword() {
